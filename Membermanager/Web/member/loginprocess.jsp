@@ -15,7 +15,7 @@
 <%
 	String userId = request.getParameter("uId");
 	String userPW = request.getParameter("uPW");
-	String userPW = request.getParameter("uPW");
+	
 
 
 
