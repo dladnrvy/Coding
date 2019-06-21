@@ -1,3 +1,4 @@
+<%@ page import = "web.Member" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -7,6 +8,12 @@
 	String uname = request.getParameter("username");
 	//getParameter 는 string 으로만 값을 받을 수 있다.
 	//여러가지 String 메소드 확인
+	
+	Member member = new Member(uname, pType, no);
+	
+	request.setAttribute("result", member);
+	
+	session.setAttribute("user", member);
 
 	/* if(pType == null){
 		pType = "a";
