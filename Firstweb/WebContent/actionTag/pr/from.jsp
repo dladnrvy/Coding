@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page buffer="8kb" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,25 +11,17 @@
 </style>
 </head>
 <body>
+<%
+		for(int i=0; i<1000; i++){
 
-	<%
-		//request.getSession(false).invalidate();
-		session.invalidate();
-	
-	%>
-	
-	<h1>로그아웃되었습니다.</h1>
-	
-	<a href ="ViewSession.jsp">view1</a><br>
-	<a href = "../response/ViewSession.jsp">responseSession</a><br>
-	
+%>
 
+<h1>from 페이지에서 실행된 결과 페이지 입니다.</h1>
+<%
+		}
+%>
 
-
-
-
-
-
+<jsp:forward page="to.jsp"/>
 
 </body>
 </html>

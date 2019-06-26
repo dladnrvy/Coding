@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:useBean id="userData" class=web.UserInfo scope="request"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,25 +11,9 @@
 </style>
 </head>
 <body>
-
-	<%
-		//request.getSession(false).invalidate();
-		session.invalidate();
-	
-	%>
-	
-	<h1>로그아웃되었습니다.</h1>
-	
-	<a href ="ViewSession.jsp">view1</a><br>
-	<a href = "../response/ViewSession.jsp">responseSession</a><br>
-	
-
-
-
-
-
-
-
-
+<h1>포워드된 페이지이고, userbean을 통한 데이터입니다.</h1>
+	<h1>
+	<%= userData %>
+	</h1>
 </body>
 </html>

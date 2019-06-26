@@ -13,6 +13,7 @@
 	<h1>session을 이용한 데이터 저장</h1>
 	<%
 		session.setAttribute("name", "king");
+		//name = class king = object 타입 특정객체를 저장
 		session.setAttribute("id", "tiger");
 		session.setAttribute("isLogin", true);
 		session.setAttribute("age", 20);

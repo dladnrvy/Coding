@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file = "sub.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,20 +12,9 @@
 </head>
 <body>
 
-	<%
-		//request.getSession(false).invalidate();
-		session.invalidate();
-	
-	%>
-	
-	<h1>로그아웃되었습니다.</h1>
-	
-	<a href ="ViewSession.jsp">view1</a><br>
-	<a href = "../response/ViewSession.jsp">responseSession</a><br>
-	
-
-
-
+	<h1>
+		폴더 경로 : <%= dataFolder %>
+	</h1>
 
 
 

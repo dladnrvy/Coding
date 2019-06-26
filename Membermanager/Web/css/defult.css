@@ -1,14 +1,15 @@
 @charset "UTF-8";
-* {
+	* {
 		margin : 0;
 		padding : 0;
 	  }
 
 	div {
 	width: 960px;
-	
+
 	}
 	#header{
+	margin: 0 auto;
 	height : 50px;
 	padding : 0 20px;
 	border-bottom : 1px solid #DDD;

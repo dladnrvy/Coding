@@ -30,23 +30,23 @@
 	if (pType.equals("a")) {
 %>
 <jsp:forward page="page_a.jsp">
-	<jsp:param value="<%=no%>" name="num" />
+	<%-- <jsp:param value="<%=no%>" name="num" />
 	<jsp:param value="<%=uname%>" name="username" />
-</jsp:forward>
+</jsp:forward> --%>
 <%
 	} else if (pType.equals("b")) {
 %>
 <jsp:forward page="page_b.jsp">
-	<jsp:param value="<%=no%>" name="num" />
+	<%-- <jsp:param value="<%=no%>" name="num" />
 	<jsp:param value="<%=uname%>" name="username" />
-</jsp:forward>
+</jsp:forward> --%>
 <%
 	} else {
 %>
 <jsp:forward page="page_c.jsp">
-	<jsp:param value="<%=no%>" name="num" />
+	<%-- <jsp:param value="<%=no%>" name="num" />
 	<jsp:param value="<%=uname%>" name="username" />
-</jsp:forward>
+</jsp:forward> --%>
 
 <%
 	}
