@@ -7,8 +7,7 @@
 	response.addCookie(c1);
 	Cookie c2 = CookieBox.createCookie("ID", "", 0);
 	response.addCookie(c2);
-	Cookie c3 = CookieBox.createCookie("chk","",0);
-	response.addCookie(c3);
+	
     
     %>
 <!DOCTYPE html>
