@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Ajax Basic</title>
+    <meta content="text/html; charset=utf-8">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+        $(document).ready(function () {
+        	
+        	//$('#btn').click(function() {
+        		$('#uId').focusout(function () {
+					
+			$('#idchkMsg').html("");
+				    	
+            $.ajax({
+                url: 'idcheck.jsp',
+                type: 'GET',
+                data: {
+                    uId : $('#uId').val(),
+                },
+                success: function (data) {
+                	//alert(data);
+                	if(data == 'Y'){
+                		//alert("y멋진아이디입니다.");
+                		//$('body').append('<span style="color:blue;">GOOD ID</span>');
+                		$('#idchkMsg').html('GoodId');
+                		$('#idchkMsg').css('color','blue');
+                	}else{
+                		//alert("n사용할 수 없는 아이디입니다.");
+                		//$('body').append('<span style="color:red;">ID</span>');
+                		$('#idchkMsg').html('Id');
+                		$('#idchkMsg').css('color','red');
+                	}
+                  //  $('body').append(data);
+                }
+            });
+            
+        	});            
+        	
+        });
+    </script>
+</head>
+<body>
+
+<input type="text" id="uId" value=""><br>
+<!-- <input type ="button" id="btn" value="ID_CHECK"> -->
+<span id="idchkMsg"></span>
+
+</body>
+</html>
