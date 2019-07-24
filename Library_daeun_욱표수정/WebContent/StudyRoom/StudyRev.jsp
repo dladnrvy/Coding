@@ -41,6 +41,19 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.js"></script>
 </head>
+<style>
+	#a{
+		background-color: black;	
+		color: white;
+		display: inline-block;
+		width: 150px;
+		height : 30px;
+		margin-left: 3px;
+		text-align: center;
+		border-radius: 3px;
+		line-height: 30px;
+	}
+</style>
 <body>
 	<div id="main_wrap">
 		<!-- header 시작 -->
@@ -66,8 +79,8 @@
 				15:00~18:00
 			<%}else if(studyroom.getStudy_time() == 4){ %>
 				18:00~21:00
-				<%} %><br>
-				
+				<%} %><br><br>
+				<a href="RS_Mypage.jsp" id="a">예약내역바로가기</a>
 		</div>
 		<!-- footer 시작 -->
 		<%@include file="../frame/footer.jsp"%>

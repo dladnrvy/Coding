@@ -78,9 +78,8 @@
 			<% }else if(list.get(i).getStudy_time() == 4){ %>
 			18:00~21:00
 			<% } %>
-		<br>
-		<a href="/lib/StudyRoom/RC.jsp" id="a">수정</a>
-		<a href="/lib/StudyRoom/RD.jsp" id="a">삭제</a>
+		<br><br>
+		<a href="/lib/StudyRoom/RD.jsp?gettime=<%= list.get(i).getSeat_num() %>" id="a">삭제</a>
 		<br><br>
 		
 		<%

@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="StudyRoom.model.Study_room"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="StudyRoomService.RDService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,14 +7,15 @@
 <%
 	RDService rds = RDService.getInstance();
 	LoginInfo loginInfo = (LoginInfo)session.getAttribute("login");
-	String user_id = loginInfo.getUser_id();
+	int del = Integer.parseInt(request.getParameter("gettime"));
 	
 
 	boolean ck = false;
 	int chk = 0;
 
 	try{
-		chk = rds.REVDelete(user_id);
+		int seatnum = rds.REVDelete(del); 
+		System.out.print(seatnum);
 		ck = true;
 	}catch(SQLException e){
 	 e.printStackTrace();
@@ -37,7 +40,13 @@
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.js"></script>
-<style>
+<style>	
+	#h4{
+	color : red;
+	font-weight: bole;
+	font-size: 20px;
+	}
+
 </style>
 </head>
 <body>
@@ -55,9 +64,9 @@
 		<%
 		if(ck){
 		%>
-		<h4><%= user_id %>님의 예약이 취소 되었습니다.</h4>
+		<h4 id="h4">정상적으로 예약이 취소 되었습니다.</h4>
 		<% }else {%>
-		<h4>예약하신 정보가 없습니다.</h4>
+		<h4 id="h4">예약하신 정보가 없습니다.</h4>
 		<% } %>
 		
 				

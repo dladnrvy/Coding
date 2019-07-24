@@ -1,4 +1,4 @@
-package Conteroller;
+package Controller;
 
 import java.io.IOException;
 import java.util.Date;

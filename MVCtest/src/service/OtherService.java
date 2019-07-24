@@ -2,7 +2,7 @@ package service;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class OtherService implements service{
+public class OtherService implements Service{
 
 	public String getViewPage(HttpServletRequest request) {
 		

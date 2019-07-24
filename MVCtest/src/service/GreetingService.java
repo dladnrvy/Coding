@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import dao.Dao;
 
-public class GreetingService implements service{
+public class GreetingService implements Service{
 
 		public Object getObject(HttpServletRequest request) {
 

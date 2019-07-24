@@ -1,4 +1,6 @@
 
+<%@page import="StudyRoomService.SeatNum"%>
+<%@page import="StudyRoom.model.Study_room"%>
 <%@page import="StudyRoom.model.user"%>
 <%@page import="StudyRoomService.RVservice"%>
 <%@page import="StudyRoomService.RCService"%>
@@ -18,10 +20,13 @@
 	
 	
 	RCService rcs = RCService.getInstance();
-	chk = rcs.SeatRC(user_id,time,seat);
+	chk = rcs.SeatRC(seat,time,user_id);
     
 	RVservice service = RVservice.getInstance();
-	user user = service.SeatRV(user_id);
+	Study_room sr = service.SeatRV(user_id);
+	
+	System.out.println(user_id);
+
 	
 %>
 <!DOCTYPE html>
@@ -67,16 +72,16 @@
 		<div id="context">
 		
 		<h4>바뀐 자리입니다.</h4><br>
-		좌석번호 : <%= user.getSeat_num() %><br>
-		시간 : <% if(user.getStudy_time() == 1){%>
+		좌석번호 : <%= sr.getSeat_num() %><br>
+		시간 : <% if(sr.getStudy_time() == 1){%>
 				09:00~12:00
 			<%
-			}else if(user.getStudy_time() == 2){
+			}else if(sr.getStudy_time() == 2){
 			%>
 				12:00~15:00
-			<%}else if(user.getStudy_time() == 3){ %>
+			<%}else if(sr.getStudy_time() == 3){ %>
 				15:00~18:00
-			<%}else if(user.getStudy_time() == 4){ %>
+			<%}else if(sr.getStudy_time() == 4){ %>
 				18:00~21:00
 				<%}else{%>
 					<h4>선택된 시간이 없습니다.</h4>

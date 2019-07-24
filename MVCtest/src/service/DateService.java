@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class DateService implements service{
+public class DateService implements Service{
 
 	public String getViewPage(HttpServletRequest request) {
 		
