@@ -51,14 +51,14 @@ public class GetMessageListService implements GuestBookService{
 			// 게시물 내용 리스트, DB 검색에 사용할 start_row, end_row
 			List<message> messageList = null;
 			int firstRow = 0;
-			int endRow = 0;
+			
 			
 			if(messageTotalCount > 0) {
 				
-				firstRow = (pageNumber-1)*MESSAGE_COUNT_PER_PAGE + 1;
-				endRow = firstRow + MESSAGE_COUNT_PER_PAGE -1;
+				firstRow = (pageNumber-1)*MESSAGE_COUNT_PER_PAGE;
+				/* endRow = firstRow + MESSAGE_COUNT_PER_PAGE; */
 				
-				messageList = dao.selectList(conn, firstRow, endRow);
+				messageList = dao.selectList(conn, firstRow, MESSAGE_COUNT_PER_PAGE);
 				
 			} else {
 				currentPageNumber = 0;
@@ -70,8 +70,7 @@ public class GetMessageListService implements GuestBookService{
 					currentPageNumber, 
 					messageList, 
 					MESSAGE_COUNT_PER_PAGE, 
-					firstRow, 
-					endRow);
+					firstRow);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

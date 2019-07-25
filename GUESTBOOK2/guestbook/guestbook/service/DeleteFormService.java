@@ -8,8 +8,8 @@ public class DeleteFormService implements GuestBookService{
 	@Override
 	public String getViewName(HttpServletRequest request, HttpServletResponse response) {
 		 String viewPage = "/WEB-INF/view/confirmDeletion.jsp";
-		 String id = request.getParameter("messageId");
-		 request.setAttribute("messageId", id);
+		// String id = request.getParameter("messageId");
+		// request.setAttribute("messageId", id);
 		 
 		return viewPage;
 	}

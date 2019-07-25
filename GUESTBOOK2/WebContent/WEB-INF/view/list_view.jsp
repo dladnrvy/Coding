@@ -24,8 +24,10 @@
 
 	</h4>
 	
-	<c:if test="${viewData.messageTotalCount>0}">
+	<h1>방명록</h1>
+	<div style="text-align: right;"><a href="guestWriteForm">글쓰기</a></div>
 	
+	<c:if test="${viewData.messageTotalCount>0}">
 	<c:forEach items="${viewData.messageList}" var="message">
 		<div>
 		메시지 번호 : ${message.id}<br> 

@@ -26,7 +26,7 @@ public class MessageDao {
 		
 		String sql = "INSERT INTO GUESTBOOK_MESSAGE "
 				+ " (MESSAGE_ID, GUEST_NAME, PASSWORD, MESSAGE) "
-				+ " values (GM_MID_SEQ.nextval,?,?,?)";
+				+ " values (message_seq,?,?,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -106,22 +106,18 @@ public class MessageDao {
 		return totalCnt;
 	}
 
-	public List<message> selectList(Connection conn, int firstRow, int endRow) {
+	public List<message> selectList(Connection conn, int firstRow, int MESSAGE_COUNT_PER_PAGE) {
 		
 		List<message> list = new ArrayList<message>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select message_id, guest_name, password, message from ( "
-				+ " select rownum rnum, message_id, guest_name, password, message from ( "
-				+ " select * from guestbook_message m order by m.message_id desc "
-				+ " ) where rownum <= ? " 
-				+ " ) where rnum >= ?";
-		
+		String sql = "select * from GUESTBOOK_MESSAGE order by message_id desc limit = ? , ?";
+			
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, endRow);
-			pstmt.setInt(2, firstRow);
+			pstmt.setInt(1, firstRow);
+			pstmt.setInt(2, MESSAGE_COUNT_PER_PAGE);
 			
 			rs = pstmt.executeQuery();
 			
