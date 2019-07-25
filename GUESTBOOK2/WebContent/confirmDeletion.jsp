@@ -12,10 +12,10 @@
 <body>
 
 	<h1>메시지 삭제 비밀번호 확인</h1>
-	<form action="deleteMessage.jsp" method ="post">
+	<form action="guestDel" method ="post">
 		
-		메시지를 삭제하시려면 비밀번호를 입력하세요<br>
-		<input type="hidden" name="messageId" value="<%= request.getParameter("messageId")%>">
+		${param.messageId}번 메시지를 삭제하시려면 비밀번호를 입력하세요<br>
+		<input type="hidden" name="messageId" value="${messageId}">
 		비밀번호<input type="password" name="password" required><br>
 		<input type="submit" value="메시지삭제">
 	
