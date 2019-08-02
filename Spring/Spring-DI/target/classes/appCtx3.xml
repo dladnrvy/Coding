@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	
+	<import resource="classpath:appCtx2.xml"/>
+	
+	<!-- 
+	생성자 주입 방식
+	<bean id="registService" class="member.MemberRegisetService">
+		<constructor-arg>
+			<ref bean="memberDao"/>
+		</constructor-arg>
+	</bean> -->
+	
+	<!-- 프러퍼티 주입방식 -->
+	<bean id="registService" class="member.MemberRegisetService">
+		<property name="memberDao">
+			<!-- <ref bean="memberDao"/> -->
+			<!-- 새로운 객체 만들어서 주입(id가 없으므로 한번만) -->
+			<bean class="member.MemberDao"/>
+		</property>
+	</bean>
+	
+	<bean 
+		id="changePwService"
+		class="member.ChangePasswordService">
+		<!-- p:memberDao-ref="memberDao" -->
+		
+		
+		<!-- <constructor-arg ref="memberDao"/> -->
+		<!-- <property name="memberDao" ref="memberDao"/> -->
+		<!-- 일반 데이터 받을땐 value -->
+	</bean>
+	
+	
+</beans>

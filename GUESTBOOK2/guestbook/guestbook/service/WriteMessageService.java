@@ -43,9 +43,7 @@ public class WriteMessageService implements GuestBookService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+				
 		return rCnt;	
 		
 	}

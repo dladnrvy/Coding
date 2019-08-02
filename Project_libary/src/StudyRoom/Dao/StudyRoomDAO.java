@@ -45,8 +45,10 @@ public class StudyRoomDAO {
 				e.printStackTrace();
 			}
 		}
-
+		System.out.println("인서트"+ insertCnt);
+		
 		return insertCnt;
+		
 	};
 
 	// 아이디에 따른 데이터 검색 메소드
