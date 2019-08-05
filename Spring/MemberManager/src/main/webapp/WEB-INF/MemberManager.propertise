@@ -1,0 +1,6 @@
+## /index.do .do확장자까지 사용자의 요청으로 인식 -> 톰켓
+##메인페이지
+/index.do = member.service.MainPageviewService
+/MemberRog = member.service.RegSave
+/MemberSave = member.service.memberService
+/LoginService = member.service.LoginService
