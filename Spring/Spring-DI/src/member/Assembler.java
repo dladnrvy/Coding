@@ -10,8 +10,10 @@ public class Assembler {
 	public Assembler() {
 	//객체 생성, 주입
 		memberDao = new MemberDao();
-		regisetService = new MemberRegisetService(memberDao);
-		pwService = new ChangePasswordService(memberDao);
+		/*
+		 * regisetService = new MemberRegisetService(memberDao); pwService = new
+		 * ChangePasswordService(memberDao);
+		 */
 		
 	}
 

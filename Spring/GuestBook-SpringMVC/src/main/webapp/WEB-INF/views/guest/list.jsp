@@ -41,7 +41,7 @@
 	
 	
 	<c:forEach begin="1" end="${viewData.pageTotalCount}" step="1" var="num">
-		<a href="guestList?page=${num}">[${num}]</a> 
+		<a href="list?page=${num}">[${num}]</a> 
 	</c:forEach>
 
 	</c:if>
