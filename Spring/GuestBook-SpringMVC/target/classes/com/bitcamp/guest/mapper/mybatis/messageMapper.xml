@@ -4,7 +4,7 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <!-- DB컬럼명과 message객체의 변수명 맞춰주기 -->
+  <!-- DB컬럼명과 message객체의 변수명 맞춰주기 (2개의 테이블 조인시 필히 사용함)-->
 	<!-- <resultMap type="com.bitcamp.guest.domain.Message" id="messageResutmap" >
 		<result property="id" column="message_id" />
 		<result property="guestName" column="guest_name" />
@@ -12,19 +12,21 @@
 		<result property="message" column="message"/>
 		!!!!!!!!!!!!!!!!!!!!!!!이렇게 하면 resultMap 으로 해서 id 값 넣어주기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	</resultMap> -->
-  
-  	<!-- select 문 사용시 output을 받아줄 객체를 선언해야함
+	
+	<!-- select 문 사용시 output을 받아줄 객체를 선언해야함
   	resultType 은 매핑할는 자바 클래스의 전체 경로를 입력함
   	ex) int - int형 객체로 쿼리 실행 결과값을 받음
   	resultMap은 선언 당시 참조로 사용한 이름을 입력
   	개발자가 직접 원하는 pojo클래스에 매핑 가능
   	parameterType - 조회결과 object
-  	 -->
+  	selectKey - mysql 시퀀스의 값을 가져올수 있고, select해 온 list에도 키값을 넣어주어 view작업을 편리하게해줌.
+  	trim - if조건사용시 ,가 붙어서 에러가 발생. 이때  trim을 사용하여 조건의 콤마 삭제 suffixOverrides =","
+   	 -->
   
   <!-- namespace 는 필수 속성이다. : dao 식별하기위한 이름 -->
-  <mapper namespace="com.bitcamp.guest.mapper.mybatis.guestMapper">
+  <mapper namespace="com.bitcamp.guest.DAO.MessageSessionDao">
   
-  <insert id="insertMessage" parameterType="com.bitcamp.guest.domain.Message">
+  <insert id="insert" parameterType="com.bitcamp.guest.domain.Message">
   	INSERT INTO GUESTBOOK_MESSAGE (GUEST_NAME, PASSWORD, MESSAGE) values (#{guestName},#{password},#{message})
   </insert>
   

@@ -2,11 +2,14 @@ package com.bitcamp.guest.Service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.guest.DAO.MessageDao;
+import com.bitcamp.guest.DAO.MessageSessionDao;
 import com.bitcamp.guest.DAO.MessageSessionTemplateDao;
 import com.bitcamp.guest.DAO.MessagejdbcTemplateDao;
 import com.bitcamp.guest.domain.Message;
@@ -22,13 +25,20 @@ public class WriteMessageService implements GuestBookService {
 	/*
 	 * @Autowired private MessagejdbcTemplateDao templateDao;
 	 */
+	/*
+	 * @Autowired private MessageSessionTemplateDao templateDao;
+	 */
 	@Autowired
-	private MessageSessionTemplateDao templateDao;
+	private SqlSessionTemplate template;
+	
+	private MessageSessionDao dao;
 	
 	public int write(Message message) {
 		
+		dao = template.getMapper(MessageSessionDao.class);
+		
 		int rCnt = 0 ;
-		rCnt = templateDao.insert(message);
+		rCnt = dao.insert(message);
 		
 		// 1. Connection 생성
 		// 2. dao 생성
