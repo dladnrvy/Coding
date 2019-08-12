@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.guest.DAO.MessageDao;
+import com.bitcamp.guest.DAO.MessageSessionTemplateDao;
 import com.bitcamp.guest.DAO.MessagejdbcTemplateDao;
 import com.bitcamp.guest.domain.Message;
 import com.bitcamp.guest.jdbc.ConnectionProvider;
@@ -18,8 +19,11 @@ public class WriteMessageService implements GuestBookService {
 	//@Autowired
 	//private MessageDao dao;
 	
+	/*
+	 * @Autowired private MessagejdbcTemplateDao templateDao;
+	 */
 	@Autowired
-	private MessagejdbcTemplateDao templateDao;
+	private MessageSessionTemplateDao templateDao;
 	
 	public int write(Message message) {
 		

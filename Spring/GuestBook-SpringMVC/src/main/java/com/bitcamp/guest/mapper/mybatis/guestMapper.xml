@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- namespace 는 필수 속성이다. : dao 식별하기위한 이름 -->
+  <mapper namespace="com.bitcamp.guest.mapper.mybatis.guestMapper">
+  
+  <insert id="insertMessage" parameterType="com.bitcamp.guest.domain.Message">
+  	INSERT INTO GUESTBOOK_MESSAGE (GUEST_NAME, PASSWORD, MESSAGE) values (#{guestName},#{password},#{message})
+  </insert>
+  
+  <select id="selectCount" resultType="int">
+  select count(*) from guestbook_message
+  </select>
+  
+  <select id="selectList" parameterType="map" resultType="com.bitcamp.guest.domain.Message">
+  <!-- 크고 작음을 표시할때 CDATA-->
+  <![CDATA[
+  	select * from GUESTBOOK_MESSAGE order by message_id desc limit #{firstRow} , #{MESSAGE_COUNT_PER_PAGE}]]>
+  </select>
+  
+   <select id="select" resultType="com.bitcamp.guest.domain.Message">
+  select * from guestbook_message where message_id = #{message_id}
+  </select>
+
+  <delete id="deleteMessage">
+  	delete from guestbook_message where message_id= #{message_id}
+  </delete>  
+  </mapper>

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bitcamp.guest.DAO.MessageDao;
 import com.bitcamp.guest.DAO.MessageRowMapper;
+import com.bitcamp.guest.DAO.MessageSessionTemplateDao;
 import com.bitcamp.guest.DAO.MessagejdbcTemplateDao;
 import com.bitcamp.guest.domain.Message;
 import com.bitcamp.guest.jdbc.ConnectionProvider;
@@ -23,8 +24,11 @@ public class DeleteMessageService implements GuestBookService{
 	//@Autowired
 	//private MessageDao dao;
 	
+	/*
+	 * @Autowired private MessagejdbcTemplateDao dao;
+	 */
 	@Autowired
-	private MessagejdbcTemplateDao dao;
+	private MessageSessionTemplateDao dao;
 	
 	@Transactional
 	public int deleteMessage(int messageId, String password) throws SQLException, MessageNotFoundException, InvalidMessagePasswordException {

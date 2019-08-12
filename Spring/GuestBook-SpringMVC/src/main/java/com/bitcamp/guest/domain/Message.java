@@ -2,32 +2,33 @@ package com.bitcamp.guest.domain;
 
 public class Message {
 
-	private int id;
-	private String guestName;
+	private int message_id;
+	private String guest_Name;
 	private String password;
 	private String message;
+	
 	public int getId() {
-		return id;
+		return message_id;
 	}
 	
 	public Message() {}
 	
-	public Message(int id, String guestName, String password, String message) {		
-		this.id = id;
-		this.guestName = guestName;
+	public Message(int message_id, String guest_Name, String password, String message) {		
+		this.message_id = message_id;
+		this.guest_Name = guest_Name;
 		this.password = password;
 		this.message = message;
 	}
 	
 	
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int message_id) {
+		this.message_id = message_id;
 	}
 	public String getGuestName() {
-		return guestName;
+		return guest_Name;
 	}
-	public void setGuestName(String guestName) {
-		this.guestName = guestName;
+	public void setGuestName(String guest_Name) {
+		this.guest_Name = guest_Name;
 	}
 	public String getPassword() {
 		return password;

@@ -3,13 +3,15 @@ package com.bitcamp.guest.Service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.guest.DAO.MessageDao;
+import com.bitcamp.guest.DAO.MessageSessionTemplateDao;
 import com.bitcamp.guest.DAO.MessagejdbcTemplateDao;
 import com.bitcamp.guest.domain.Message;
 import com.bitcamp.guest.domain.MessageListView;
@@ -20,8 +22,11 @@ public class GetMessageListService implements GuestBookService{
 	
 	//@Autowired
 	//private MessageDao dao;
+	/*
+	 * @Autowired private MessagejdbcTemplateDao dao;
+	 */
 	@Autowired
-	private MessagejdbcTemplateDao dao;
+	private MessageSessionTemplateDao dao;
 	
 	// 1. 한페이지에 보여줄 게시글의 개수
 	private static final int MESSAGE_COUNT_PER_PAGE = 3;
@@ -57,8 +62,12 @@ public class GetMessageListService implements GuestBookService{
 				
 				//messageList = dao.selectList(conn, firstRow, MESSAGE_COUNT_PER_PAGE);
 				  
+				Map<String, Object> params = new HashMap<String, Object>();
+				params.put("firstRow", firstRow);
+				params.put("MESSAGE_COUNT_PER_PAGE", MESSAGE_COUNT_PER_PAGE);
 				
-				messageList = dao.selectList(firstRow, MESSAGE_COUNT_PER_PAGE);
+				
+				messageList = dao.selectList(params);
 				
 			} else {
 				currentPageNumber = 0;
@@ -72,8 +81,7 @@ public class GetMessageListService implements GuestBookService{
 					MESSAGE_COUNT_PER_PAGE, 
 					firstRow);
 			
-		//} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		//} catch (SQLException e) {s
 		//	e.printStackTrace();
 		//}
 		
