@@ -59,7 +59,7 @@
 		
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="mapperLocations"
-			value="classpath:com/bitcamp/guest/mapper/mybatis/*.xml" />
+			value="classpath:com/reservation/rsv/mapper/mybatis/*.xml" />
 		
 	</beans:bean>
 	

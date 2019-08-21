@@ -2,13 +2,17 @@ package com.bitcamp.mm.member.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.mm.jdbc.ConnectionProvider;
 import com.bitcamp.mm.member.dao.MemberDao;
+import com.bitcamp.mm.member.dao.MemberSessionDao;
 import com.bitcamp.mm.member.dao.MemberTemplateDao;
 import com.bitcamp.mm.member.domain.ListViewData;
 import com.bitcamp.mm.member.domain.MemberInfo;
@@ -21,11 +25,16 @@ public class MemberListService implements MemberService {
 	 * @Autowired private MemberDao dao;
 	 */
 	@Autowired
-	private MemberTemplateDao dao;
+	/* private MemberTemplateDao dao; */
+	private SqlSessionTemplate template;
+	
+	private MemberSessionDao dao;
 
 	final int MEMBER_CNT_List = 3;
 
 	public ListViewData getListData(int currentPageNumber, SearchParam searchParam) {
+		
+		dao = template.getMapper(MemberSessionDao.class);
 		
 		ListViewData listData = new ListViewData();
 		   
@@ -61,20 +70,31 @@ public class MemberListService implements MemberService {
 			//3. name으로 검색 : where like uname '%?%'
 			//4. id또는 name 으로 검색 : where like uname '%?%  and like uid '%?%''
 			
-			listData.setMemberList(dao.selectList(index, MEMBER_CNT_List));
-			
-			if(searchParam == null) {
-				memberList = dao.selectList(index, MEMBER_CNT_List);
-			} else if(searchParam.getStype().equals("both")) {
-				memberList = dao.selectListByBoth(index, MEMBER_CNT_List, searchParam);
-			} else if(searchParam.getStype().equals("id")) {
-				memberList = dao.selectListById(index, MEMBER_CNT_List, searchParam);
-			} else if(searchParam.getStype().equals("name")) {
-				memberList = dao.selectListByName(index, MEMBER_CNT_List, searchParam);
-			}
+			Map<String, Object> search = new HashMap<String, Object>();
+			search.put("search", searchParam);
+			search.put("index", index);
+			search.put("MEMBER_CNT_List", MEMBER_CNT_List);
 			
 			
-			listData.setMemberList(memberList);
+		/*
+		 * listData.setMemberList(dao.selectList(search));
+		 * 
+		 * System.out.println(searchParam.getKeyword()); memberList =
+		 * dao.selectList(search);
+		 */
+			memberList = dao.selectList(search);
+		
+		/*
+		 * if(searchParam.getStype().equals("both")) { memberList =
+		 * dao.selectListByBoth(sear); } else if(searchParam.getStype().equals("id")) {
+		 * memberList = dao.selectListById(sear); } else
+		 * if(searchParam.getStype().equals("name")) { memberList =
+		 * dao.selectListByName(sear); }
+		 */
+		 
+			
+			
+		 listData.setMemberList(memberList); 
 			
 			// 1 -> 9-0 =9, 2 -> 9-3=6
 			int no = totalCnt - index;
@@ -88,4 +108,16 @@ public class MemberListService implements MemberService {
 		
 		
 	}                  
+
+	public List<MemberInfo> getAllList(){
+		
+		dao = template.getMapper(MemberSessionDao.class);
+		
+		List<MemberInfo> list = dao.selectAllList();
+		
+		return list;
+	}
+	
+	
+	
 }

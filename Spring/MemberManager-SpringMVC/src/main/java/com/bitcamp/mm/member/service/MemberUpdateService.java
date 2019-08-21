@@ -7,11 +7,13 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.mm.jdbc.ConnectionProvider;
 import com.bitcamp.mm.member.dao.MemberDao;
+import com.bitcamp.mm.member.dao.MemberSessionDao;
 import com.bitcamp.mm.member.dao.MemberTemplateDao;
 import com.bitcamp.mm.member.domain.MemberInfo;
 import com.bitcamp.mm.member.domain.RequestMemberEdit;
@@ -22,13 +24,22 @@ public class MemberUpdateService implements MemberService{
 	/*
 	 * @Autowired private MemberDao dao;
 	 */
+	/*
+	 * @Autowired private MemberTemplateDao dao;
+	 */
 	@Autowired
-	private MemberTemplateDao dao;
+	private SqlSessionTemplate template;
+	
+	private MemberSessionDao dao;
+	
+	
 	
 	//id로 idx값 불러오기
 	public MemberInfo getEditFormData(int id) {
 		//Connection conn = null;
 		MemberInfo memberInfo = null;
+		
+		dao = template.getMapper(MemberSessionDao.class);
 		
 		//try {
 			//conn = ConnectionProvider.getConnection();
@@ -42,6 +53,8 @@ public class MemberUpdateService implements MemberService{
 	}
 	
 	public int edit(RequestMemberEdit edit, String oldFileName, HttpServletRequest request) {
+		
+		dao = template.getMapper(MemberSessionDao.class);
 		
 		int rCnt = 0;
 		

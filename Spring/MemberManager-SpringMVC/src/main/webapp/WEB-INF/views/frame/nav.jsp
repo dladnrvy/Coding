@@ -22,10 +22,11 @@
 		</c:if>
 		</li>
 		<li><a href="<c:url value='/member/regist'/>">회원가입</a></li>
-		<li><a href="<c:url value='/member/mypage'/>">MyPage1</a></li>
-		<li><a href="<c:url value='/member/mypage'/>">MyPage2</a></li>
+		<li><a href="<c:url value='/member/mypage/mypage'/>">MyPage1</a></li>
+		<li><a href="<c:url value='/member/mypage/mypage'/>">MyPage2</a></li>
 		<li><a href="<c:url value='/member/memberList'/>">회원리스트</a></li>
-		<li><a href="<c:url value='/newMember/memberList2.jsp'/>">회원리스트2</a></li>
+		<li><a href="<c:url value='/member/json/memberListJson'/>">회원리스트JSON</a></li>
+		<li><a href="<c:url value='/member/json/memberListJson2'/>">회원리스트JSON2</a></li>
 		<li><a href="<c:url value='/member/logout'/>">로그아웃</a></li>
 		
 	</ul>

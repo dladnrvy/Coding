@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+   <mapper namespace="com.reservation.rsv.dao.ReservationDao">
+  
+  <resultMap id="FirstRV" type="com.reservation.rsv.domain.FirstReserve">
+  	<id property="IDX" column="idx"/>
+  	<result property="UNAME" column="uname"/>
+  	<result property="SEAT_NUM" column="seat_num"/>
+  	<result property="regdate" column="regdate"/>
+  </resultMap>
+  
+  <resultMap id="SecondRV" type="com.reservation.rsv.domain.SecondReserve">
+  	<id property="IDX" column="idx"/>
+  	<result property="UNAME" column="uname"/>
+  	<result property="SEAT_NUM" column="seat_num"/>
+  	<result property="regdate" column="regdate"/>
+  </resultMap>
+  
+  <resultMap id="ThirdRV" type="com.reservation.rsv.domain.ThirdReserve">
+  	<id property="IDX" column="idx"/>
+  	<result property="UNAME" column="uname"/>
+  	<result property="SEAT_NUM" column="seat_num"/>
+  	<result property="regdate" column="regdate"/>
+  </resultMap>
+  
+	<insert id="firstInsert" parameterType="com.reservation.rsv.domain.FirstReserve">
+	insert into firsttime (uname,seat_num)values (#{uname},#{seat_num});
+	</insert>
+	
+	<insert id="secondInsert" parameterType="com.reservation.rsv.domain.SecondReserve">
+	insert into secondtime (uname,seat_num)values (#{uname},#{seat_num});
+	</insert>
+	
+	<insert id="thirdInsert" parameterType="com.reservation.rsv.domain.ThirdReserve">
+	insert into thirdtime (uname,seat_num)values (#{uname},#{seat_num});
+	</insert>
+	
+	<select id="firstSelect" resultMap="FirstRV">
+	select uname,seat_num from firsttime;
+	</select>
+	
+	<select id="secondSelect" resultMap="SecondRV">
+	select uname,seat_num from secondtime;
+	</select>
+	
+	<select id="thirdSelect" resultMap="ThirdRV">
+	select uname,seat_num from thirdtime;
+	</select>
+
+
+  
+  
+  
+  </mapper>

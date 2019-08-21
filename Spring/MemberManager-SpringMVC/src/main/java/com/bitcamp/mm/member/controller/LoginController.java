@@ -33,14 +33,19 @@ public class LoginController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String login(@RequestParam("uId") String id,
 						@RequestParam("uPW") String pw,
-						HttpServletRequest request) {
+						HttpServletRequest request,
+						HttpSession session) {
 		
 		String view = "member/loginfail";
 		
-		boolean loginChk = loginService.login(id, pw, request);
+		int loginChk = loginService.login(id, pw, request);
 		
-		if(loginChk) {
-			view = "redirect:/main";
+		switch(loginChk) {
+		
+			case 1 : view = "member/notVerify";
+				break;
+			case 2 : view = "redirect:/main";
+				break;
 		}
 		
 		

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <style>
+        div.card {
+            float: left;
+            margin: 2px;
+            width: 33%;
+            border: 3px solid;
+        }
+
+        div#memberlist {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>회원가입</h1>
+    <hr>
+    <form id="form">
+        아이디 <input type="text" name="uId" id="uId"><br>
+        비밀번호 <input type="password" name="uPW" id="uPW"><br>
+        이름 <input type="text" name="uName" id="uName"><br>
+        <input type="submit" value="가입">
+    </form>
+
+    <script>
+        $(document).ready(function() {
+
+            
+
+            $('#form').submit(function() {
+                
+                /*var list = {
+                uId: $('#uId').val(),
+                uPw: $('#uPw').val(),
+                uName: $('#uName').val()
+                };*/
+
+               /* $.ajax({
+                    url: 'http://localhost:8080/mm/rest/members',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        uId: $('#uId').val(),
+                        uPW: $('#uPW').val(),
+                        uName: $('#uName').val()
+                    }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function(data) {
+                        alert(data);
+                    }
+                });
+            });*/
+                
+                 $.ajax({
+                    url: 'http://localhost:8080/mm/rest/members',
+                    type: 'POST',
+                    data: $('#form').serialize()
+                     /*{ // uId=abc&upw=123&uname=cool
+                        uId: $('#uId').val(),
+                        uPW: $('#uPW').val(),
+                        uName: $('#uName').val()
+                    }*/,
+                    success: function(data) {
+                        alert(data);
+                    }
+                });
+            });
+            return false;
+        });
+    </script>
+</body></html>

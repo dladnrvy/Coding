@@ -136,23 +136,6 @@ public class MemberTemplateDao {
 		return jdbctemplate.update(sql, Integer.class);
 	}
 	
-	public int memberDelete(Connection conn, int id) {
-		
-		int rCnt = 0;
-		PreparedStatement pstmt = null;
-		
-		String sql = "delete from member where idx = ?";
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, id);
-			rCnt = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	
-		return rCnt;
-	}
 	
 	
 	
