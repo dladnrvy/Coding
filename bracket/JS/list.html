@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>   
+</head>
+<style>
+    #main{
+        display: inline-block;
+        width: 250px;
+        height: 370px;
+        border: 2px solid #DDD;
+        margin: 5px;
+        text-align: center;
+    }
+    
+    #pho{
+        width : 240px;
+        height: 240px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    #info{
+        display: none;
+    }
+    /*#textList{
+        display: none;
+    }*/
+    #update{
+        display: none;
+    }
+    #photo{
+        cursor: pointer;
+    }
+    
+    
+    
+</style>
+<body>
+	<!--메인 리스트-->
+    
+	<div id="contents">
+	<h3>유용한 정보/반려동물훈련법</h3>
+	<hr>
+        <br>
+    <div id="search">
+        <form>
+        <input type="text" value="Search" id="keyword">
+        <input type="submit" value="검색">
+        </form>
+        <a href="writeInfo.html">글쓰기</a>
+        <br><br>
+    </div>
+    <div id="list"></div>
+    <div id="textList"></div>
+    
+    <div id="update">
+        <form id="form" enctype="multipart/form-data">
+        <input type="button" value="취소" id="cencle">
+		<input type="submit" value="수정">
+	
+		<input type="text" name="uId" id="uId">
+		<input type="text" name="title" id="title">
+		<input type="file" name="photo" id="photo">
+		<textarea rows="3" cols="30" name="text" id="text"></textarea>
+	    </form>
+    </div>
+        
+	</div>
+    <hr>
+    
+    
+   
+	
+<script>
+	$(document).ready(function() {
+       list(); 
+    });
+    
+		function list() {
+			
+            $('#list').css('display','block');
+            $('#search').css('display','block');
+            
+			$.ajax({	
+				url: 'http://localhost:8080/info/infoMain',
+				type : 'GET',
+                /*dataType: 'json',*/
+                /*enctype: 'multipart/form-data',*/
+                contentType : false,
+                processData : false,
+				success : function(data) {
+                    
+                    var html = '';
+                
+                    
+                    
+					for(i=0; i<data.length; i++){
+                        html += '<div id="main">'
+                        html += '<div id="idx">'+data[i].idx+'</div>\n';
+                        html += '<div class="list" id="photo"><img onclick="textList('+data[i].idx+')" id="pho" src="http://localhost:8080/info/uploadfile/'+data[i].photo +'"/></div>\n';
+                        html += '<div class="list" id="title">'+data[i].title +'</div>\n';
+                        html += '<div class="list" id="uId">'+data[i].uId +'</div>\n';
+                        html += '<div class="list" id="date">'+data[i].date.substr(0,16)+'</div>\n';
+                        html += '</div>'
+                        /*html += '수정'*/
+                    }
+
+                    
+                    $('#list').html(html);
+				}			
+				
+			});
+		};
+    
+   
+    
+			
+        
+        
+    
+        function textList(idx) {
+			
+            /*$('#textList').css('display','block');*/
+            $('#list').css('display','none');
+            $('#search').css('display','none');
+            
+			$.ajax({	
+				url: 'http://localhost:8080/info/infoMain/'+idx,
+				type : 'GET',
+                /*dataType: 'json',*/
+                /*enctype: 'multipart/form-data',*/
+                contentType : false,
+                processData : false,
+				success : function(data) {
+                    
+                    var html = '';  
+                    
+                    html += '<div class="list" id="uId">\n';
+                    html += '아이디 : '+data.uId+' 님의 글입니다. <br>\n';
+                    html += '</div>\n';
+                    html += '<div class="list" id="title">\n';
+                    html += '제목 : '+data.title +'</div>\n';
+                    html += '<div class="list" id="photo">\n';
+                    html += '<img id="pho" src="http://localhost:8080/info/uploadfile/'+data.photo +'"/></div>\n';
+                    html += '<div id="text">\n';
+                    html += '내용 : '+data.text+'</div>';
+                    html += '<div id="choice">';
+                    html += '<button onclick ="list();" >리스트</button>';
+                    html += '<button onclick ="del('+data.idx+')">삭제</button>';
+                    html += '<button onclick ="put('+data.idx+')">수정</button>';
+                    html += '</div>';
+                          
+                    $('#textList').html(html);
+				}			
+				
+			});
+		};
+    
+    
+        function put(idx){
+            
+            $('#list').css('display','none');
+            $('#search').css('display','none');
+            $('#update').css('display','block');
+            
+            $('#form').submit(function(){
+                    
+            var form = $('#form')[0];
+            var formData = new FormData(form);
+            
+            /*formData.append("uId",$('#uId').val());
+            formData.append("title",$('#title').val());
+            formData.append("text",$('#text').val());
+            formData.append("photo",$('#photo')[0].files[0]);*/
+            
+            alert('뭐야');
+            
+			$.ajax({
+                url : 'http://localhost:8080/info/infoMain/'+idx,
+                type : 'PUT',
+               data : formData,
+                contentType: false,
+                processData: false,
+				success : function(data) {
+                    if(data == 'success')
+					alert('정상적으로 수정되었습니다.');
+                    /*location.href = "list.html";*/
+                    else{
+                        alert('오류');
+                    }
+				}			
+				
+			});
+            return false;
+		  });
+       };
+    
+    
+    
+        function del(idx){
+            
+            if(confirm('정말 삭제하시겠습니까?')){
+            $.ajax({
+                url : 'http://localhost:8080/info/infoMain/'+idx,
+                type : 'DELETE',
+         /*       contentType: false,
+                processData: false,*/
+				success : function(data) {
+                    if(data == 'success'){
+					alert('삭제되었습니다.');
+                    location.href = "list.html";
+                    }else{
+                        alert('오류');
+                    }
+				}			
+				
+			 });
+            };
+        };
+    
+        
+
+     
+    
+		
+	
+
+
+</script>
+
+
+</body>
+</html>

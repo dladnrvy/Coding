@@ -97,7 +97,7 @@
 		<!-- 구글 587 다른 메일은 465 or 25 일수도 있음 -->
 		<beans:property name="username"
 			value="dnrvy6719@gmail.com" />
-		<beans:property name="password" value="비밀" />
+		<beans:property name="password" value="iamukpyo1234!" />
 		<beans:property name="defaultEncoding" value="utf-8" />
 		<beans:property name="javaMailProperties">
 			<beans:props>
