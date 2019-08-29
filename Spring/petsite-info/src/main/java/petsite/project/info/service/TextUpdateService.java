@@ -21,7 +21,7 @@ public class TextUpdateService {
 	
 	private InfoDao dao;
 	
-	public int updateText(InfoList infolist, String oldFileName, HttpServletRequest request) {
+	public int updatePhoto(InfoList infolist, String oldFileName, HttpServletRequest request) {
 		
 		dao = template.getMapper(InfoDao.class);
 		
@@ -51,5 +51,17 @@ public class TextUpdateService {
 		Cnt = dao.update(infosave);
 		
 		return Cnt;
+	}
+	
+	public int updateText(InfoList infolist) {
+		dao = template.getMapper(InfoDao.class);
+		
+		int cnt = 0;
+		
+		InfoSave infosave = infolist.toInfoSave();
+		
+		cnt = dao.update(infosave);
+		
+		return cnt;
 	}
 }

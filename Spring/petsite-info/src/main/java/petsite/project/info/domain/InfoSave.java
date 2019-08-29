@@ -12,17 +12,25 @@ public class InfoSave {
 	private String text;
 	private String photo;
 	private String date;
+	private int num;
 	
+	
+
 	public InfoSave() {}
 
-	public InfoSave(int idx, String uId, String title, String text, String photo, String date) {
+	
+
+	public InfoSave(int idx, String uId, String title, String text, String photo, String date, int num) {
 		this.idx = idx;
 		this.uId = uId;
 		this.title = title;
 		this.text = text;
 		this.photo = photo;
 		this.date = date;
+		this.num = num;
 	}
+
+
 
 	public int getIdx() {
 		return idx;
@@ -71,12 +79,24 @@ public class InfoSave {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "InfoSave [idx=" + idx + ", uId=" + uId + ", title=" + title + ", text=" + text + ", photo=" + photo
-				+ ", date=" + date + "]";
+				+ ", date=" + date + ", num=" + num + "]";
 	}
+
+	
 	
 	
 	

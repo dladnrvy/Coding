@@ -46,8 +46,8 @@
 	<hr>
         <br>
     <div id="search">
-        <form>
-        <input type="text" value="Search" id="keyword">
+        <form id="SearchForm">
+        <input type="text" value="Search" id="title">
         <input type="submit" value="검색">
         </form>
         <a href="writeInfo.html">글쓰기</a>
@@ -55,6 +55,7 @@
     </div>
     <div id="list"></div>
     <div id="textList"></div>
+        
     
     <div id="update">
         <form id="form" enctype="multipart/form-data">
@@ -79,6 +80,7 @@
        list(); 
     });
     
+        /*전체리스트*/
 		function list() {
 			
             $('#list').css('display','block');
@@ -120,7 +122,7 @@
 			
         
         
-    
+        /*게시물*/
         function textList(idx) {
 			
             /*$('#textList').css('display','block');*/
@@ -160,6 +162,7 @@
 		};
     
     
+        /*수정*/
         function put(idx){
             
             $('#list').css('display','none');
@@ -180,7 +183,7 @@
             
 			$.ajax({
                 url : 'http://localhost:8080/info/infoMain/'+idx,
-                type : 'PUT',
+                type : 'POST',
                data : formData,
                 contentType: false,
                 processData: false,
@@ -194,12 +197,12 @@
 				}			
 				
 			});
-            return false;
 		  });
+            return false;
        };
     
     
-    
+        /*삭제*/
         function del(idx){
             
             if(confirm('정말 삭제하시겠습니까?')){
@@ -220,6 +223,61 @@
 			 });
             };
         };
+    
+    
+        /*검색 title 전달*/
+        function searchTitle(){
+            
+            $('#SearchForm').submit(function(){
+                
+            $.ajax({
+                url : 'http://localhost:8080/info/search',
+                type : 'POST',
+                data : JSON.stringify({
+                    title : $('#title').val()
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success : function(data){
+                    alert('검색한 제목을 넘겼당');
+                }
+            });
+                $.ajax({
+                   url : 'http://localhost:8080/info/search',
+                   type : 'GET',
+                   contentType : false,
+                   processData : false,
+				   success : function(data) {
+                    alert('검색한 결과를 가져왔담');
+                    var html = '';
+                
+					for(i=0; i<data.length; i++){
+                        html += '<div id="main">'
+                        html += '<div id="idx">'+data[i].idx+'</div>\n';
+                        html += '<div class="list" id="photo"><img onclick="textList('+data[i].idx+')" id="pho" src="http://localhost:8080/info/uploadfile/'+data[i].photo +'"/></div>\n';
+                        html += '<div class="list" id="title">'+data[i].title +'</div>\n';
+                        html += '<div class="list" id="uId">'+data[i].uId +'</div>\n';
+                        html += '<div class="list" id="date">'+data[i].date.substr(0,16)+'</div>\n';
+                        html += '</div>'
+                        /*html += '수정'*/
+                    }
+
+                    
+                    $('#list').html(html);
+				}
+                       
+                       
+                   }
+                    
+                });
+            
+                
+            });
+        return false; 
+        };
+    
+    
+        
     
         
 

@@ -51,6 +51,8 @@ public class ListController {
 		
 		List<InfoList> list = listService.getAllList();
 		
+		System.out.println(list);
+		
 		ResponseEntity<List<InfoList>> allList = new ResponseEntity<List<InfoList>>(list, HttpStatus.OK);
 		
 		return allList;
@@ -82,17 +84,18 @@ public class ListController {
 		
 		return new ResponseEntity<String>(rCnt>0?"success":"fail",HttpStatus.OK);
 	}
+
 	
 	@PutMapping("/{idx}")
 	public ResponseEntity<String> Update(
 			@PathVariable("idx") int idx,
-			HttpServletRequest request,
-			InfoList infolist
+			@RequestBody InfoList infolist
 			){
+		infolist.setIdx(idx);
 		
-		System.out.println(infolist);
+		System.out.println("글수정"+infolist.toString());
 		
-		int cnt = updateService.updateText(infolist, "", request);
+		int cnt = updateService.updateText(infolist);
 		
 		return new ResponseEntity<String>(cnt>0?"success":"fail",HttpStatus.OK);
 	}

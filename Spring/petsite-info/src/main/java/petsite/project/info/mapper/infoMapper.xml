@@ -31,7 +31,14 @@
 </select>
 
 <update id="update" parameterType="petsite.project.info.domain.InfoSave">
- update info set i_title = #{title}, i_text = #{text}, i_img = #{photo} where i_index = #{idx}
+ update info set 
+ 	<if test="photo != null">
+ 	i_img = #{photo}
+ 	</if>
+ 	<if test="photo == null">
+ 	i_text = #{text}, i_title = #{title} 
+ 	</if>
+ 	where i_index = #{idx}
 </update>
 
 <delete id="delete">
@@ -39,18 +46,24 @@
 </delete>
 
 <!-- text로 검색했을 때 나오는 개수 -->
-<select id="selectCount" parameterType="petsite.project.info.domain.InfoSave" resultType="int">
- select count(*) from info where i_text = #{text}
+<select id="TitleCount" parameterType="petsite.project.info.domain.InfoSave" resultType="int">
+ select count(*) from info Like CONCAT('%',#{text},'%')
 </select>
 
 <!-- 전체 개수 -->
 <select id="selectCount" parameterType="petsite.project.info.domain.InfoSave" resultType="int">
- select count(*) from info
+ select count(*) from info 
+</select>
+
+<!-- 컷팅 -->
+<select id="selectCountCut" parameterType="petsite.project.info.domain.InfoSave" resultType="int">
+ select count(*) from info limit #{index}, #{count}
 </select>
 
 <!-- text로 검색했을 때 나오는 게시물 -->
-<select id="selectCount" parameterType="petsite.project.info.domain.InfoSave" resultType="int">
- select * from info where i_text Like CONCAT('%',#{text},'%') where limit #{index}, #{COUNT}
+<select id="selectTitles"  resultMap="info">
+ select * from info where i_title Like CONCAT('%',#{text},'%')
 </select>
+
 
 </mapper>
