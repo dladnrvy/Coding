@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Insert title here</title>
+</head>
+<style>
+    .form-group {
+        float: left;
+        margin: 10px;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<body>
+    <form action="#" class="search-property-1">
+        <div class="row">
+            <div class="col-lg align-items-end">
+                <div class="form-group">
+                    <label for="#">Commute</label>
+                    <div class="form-field">
+                        <div class="icon"><span class="ion-ios-search"></span></div>
+                        <input type="radio" id="towork" name="work" class="work" value="towork">출근
+                        <input type="radio" id="fromwork" name="work" class="work" value="fromwork">퇴근
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg align-items-end">
+                <div class="form-group">
+                    <label for="#">Date</label>
+                    <div class="form-field">
+                        <div class="icon"><span class="ion-ios-calendar"></span></div>
+                        <input type="text" class="form-control checkin_date" placeholder="날짜를 선택해주세요" id="datepicker" name="p_date">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg align-items-end">
+                <div class="form-group">
+                    <label for="#">Time</label>
+                    <div class="form-field">
+                        <div class="icon"><span class="ion-ios-calendar"></span></div>
+                        <select name="commute" id="tocommute" class="form-control">
+                            <option hidden>선택</option>
+                            <option value="0700" class="toworktime">07:00</option>
+                            <option value="0715" class="toworktime">07:15</option>
+                            <option value="0730" class="toworktime">07:30</option>
+                            <option value="0745" class="toworktime">07:45</option>
+                            <option value="0800" class="toworktime">08:00</option>
+                            <option value="0815" class="toworktime">08:15</option>
+                            <option value="0830" class="toworktime">08:30</option>
+                            <option value="0845" class="toworktime">08:45</option>
+                            <option value="0900" class="toworktime">09:00</option>
+
+                            <option value="1800" class="formworktime">18:00</option>
+                            <option value="1815" class="formworktime">18:15</option>
+                            <option value="1830" class="formworktime">18:30</option>
+                            <option value="1845" class="formworktime">18:45</option>
+                            <option value="1900" class="formworktime">19:00</option>
+                            <option value="1915" class="formworktime">19:15</option>
+                            <option value="1930" class="formworktime">19:30</option>
+                            <option value="1930" class="formworktime">19:45</option>
+                            <option value="2000" class="formworktime">20:00</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <div class="col-lg align-self-end">
+                <div class="form-group">
+                    <div class="form-field">
+                        <input type="submit" value="Search" class="form-control btn btn-primary">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+<script>
+    $(function() {
+        $("#datepicker").datepicker();
+        
+        $('#towork').change(function() {
+        if ($('#towork').prop('checked')== true) {
+            $('.toworktime').css('display', 'block');
+            $('.formworktime').css('display', 'none');
+            
+        }
+         });
+        
+     
+         $('#fromwork').change(function() {
+        if ($('#fromwork').prop('checked')== true) {
+        $('.toworktime').css('display', 'none');
+        $('.formworktime').css('display', 'block');
+            
+        }
+         });
+        
+    });
+
+
+</script></html>
