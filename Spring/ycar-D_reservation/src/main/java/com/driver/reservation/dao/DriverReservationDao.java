@@ -19,5 +19,5 @@ public interface DriverReservationDao {
 	public List<DriverReservation> todayList(int idx);
 
 	//삭제
-	public int deleteCarpoor(int dr_idx);
+	public int deleteCarpool(int dr_idx);
 }

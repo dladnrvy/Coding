@@ -20,7 +20,7 @@ public class deleteService {
 		System.out.println("삭제) dr_idx  : " + dr_idx);
 		
 		int cnt = 0;
-		cnt = dao.deleteCarpoor(dr_idx);
+		cnt = dao.deleteCarpool(dr_idx);
 		
 		return cnt;
 	}

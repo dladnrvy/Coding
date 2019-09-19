@@ -4,7 +4,11 @@
     <title>Insert title here</title>
 </head>
 <style>
-    .form-group {
+    .check{
+        display: none;
+        color: red;
+    }
+    /*.form-group {
         display: inline;
         margin: 20px;
     }
@@ -25,7 +29,7 @@
 
     .col-lg align-items-end {
         margin: 10px;
-    }
+    }*/
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -44,6 +48,8 @@
                             <div class="icon"><span class="ion-ios-search"></span></div>
                             <input type="radio" id="towork" name="work" class="work" value="출근">출근
                             <input type="radio" id="fromwork" name="work" class="work" value="퇴근">퇴근
+                            <br>
+                            <span id="workCheck" class="check">출근 또는 퇴근을 선택해주세요.</span>
 
                         </div>
                     </div>
@@ -56,6 +62,8 @@
                             <div class="icon"><span class="ion-ios-calendar"></span></div>
                             <!--날짜 value-->
                             <input type="text" class="form-control checkin_date" placeholder="날짜를 선택해주세요" id="datepicker" name="p_date">
+                            <br>
+                            <span id="dateCheck" class="check">날짜를 선택해주세요.</span>
                         </div>
                     </div>
                 </div>
@@ -67,62 +75,66 @@
                             <!--시간 value-->
                             <select name="commute" id="tocommute" class="form-control">
                                 <option hidden>선택</option>
-                                <option value="0700" class="toworktime">07:00</option>
-                                <option value="0715" class="toworktime">07:15</option>
-                                <option value="0730" class="toworktime">07:30</option>
-                                <option value="0745" class="toworktime">07:45</option>
-                                <option value="0800" class="toworktime">08:00</option>
-                                <option value="0815" class="toworktime">08:15</option>
-                                <option value="0830" class="toworktime">08:30</option>
-                                <option value="0845" class="toworktime">08:45</option>
-                                <option value="0900" class="toworktime">09:00</option>
+                                <option value="07:00" class="toworktime">07:00</option>
+                                <option value="07:15" class="toworktime">07:15</option>
+                                <option value="07:30" class="toworktime">07:30</option>
+                                <option value="07:45" class="toworktime">07:45</option>
+                                <option value="08:00" class="toworktime">08:00</option>
+                                <option value="08:15" class="toworktime">08:15</option>
+                                <option value="08:30" class="toworktime">08:30</option>
+                                <option value="08:45" class="toworktime">08:45</option>
+                                <option value="09:00" class="toworktime">09:00</option>
 
-                                <option value="1800" class="fromworktime">18:00</option>
-                                <option value="1815" class="fromworktime">18:15</option>
-                                <option value="1830" class="fromworktime">18:30</option>
-                                <option value="1845" class="fromworktime">18:45</option>
-                                <option value="1900" class="fromworktime">19:00</option>
-                                <option value="1915" class="fromworktime">19:15</option>
-                                <option value="1930" class="fromworktime">19:30</option>
-                                <option value="1930" class="fromworktime">19:45</option>
-                                <option value="2000" class="fromworktime">20:00</option>
+                                <option value="18:00" class="fromworktime">18:00</option>
+                                <option value="18:15" class="fromworktime">18:15</option>
+                                <option value="18:30" class="fromworktime">18:30</option>
+                                <option value="18:45" class="fromworktime">18:45</option>
+                                <option value="19:00" class="fromworktime">19:00</option>
+                                <option value="19:15" class="fromworktime">19:15</option>
+                                <option value="19:30" class="fromworktime">19:30</option>
+                                <option value="19:30" class="fromworktime">19:45</option>
+                                <option value="20:00" class="fromworktime">20:00</option>
                             </select>
                             ~
 
                             <!--시간 value-->
                             <select name="commute" id="tocommutes" class="form-control">
                                 <option hidden>선택</option>
-                                <option value="0715" class="toworktimes">07:15</option>
-                                <option value="0730" class="toworktimes">07:30</option>
-                                <option value="0745" class="toworktimes">07:45</option>
-                                <option value="0800" class="toworktimes">08:00</option>
-                                <option value="0815" class="toworktimes">08:15</option>
-                                <option value="0830" class="toworktimes">08:30</option>
-                                <option value="0845" class="toworktimes">08:45</option>
-                                <option value="0900" class="toworktimes">09:00</option>
-                                <option value="0915" class="toworktimes">09:15</option>
-                                <option value="0930" class="toworktimes">09:30</option>
-                                <option value="0945" class="toworktimes">09:45</option>
-                                <option value="1000" class="toworktimes">10:00</option>
+                                <option value="07:15" class="toworktimes">07:15</option>
+                                <option value="07:30" class="toworktimes">07:30</option>
+                                <option value="07:45" class="toworktimes">07:45</option>
+                                <option value="08:00" class="toworktimes">08:00</option>
+                                <option value="08:15" class="toworktimes">08:15</option>
+                                <option value="08:30" class="toworktimes">08:30</option>
+                                <option value="08:45" class="toworktimes">08:45</option>
+                                <option value="09:00" class="toworktimes">09:00</option>
+                                <option value="09:15" class="toworktimes">09:15</option>
+                                <option value="09:30" class="toworktimes">09:30</option>
+                                <option value="09:45" class="toworktimes">09:45</option>
+                                <option value="10:00" class="toworktimes">10:00</option>
 
                                 
-                                <option value="1815" class="fromworktimes">18:15</option>
-                                <option value="1830" class="fromworktimes">18:30</option>
-                                <option value="1845" class="fromworktimes">18:45</option>
-                                <option value="1900" class="fromworktimes">19:00</option>
-                                <option value="1915" class="fromworktimes">19:15</option>
-                                <option value="1930" class="fromworktimes">19:30</option>
-                                <option value="1930" class="fromworktimes">19:45</option>
-                                <option value="2000" class="fromworktimes">20:00</option>
-                                <option value="2015" class="fromworktimes">20:15</option>
-                                <option value="2030" class="fromworktimes">20:30</option>
-                                <option value="2045" class="fromworktimes">20:45</option>
-                                <option value="2100" class="fromworktimes">21:00</option>
+                                <option value="18:15" class="fromworktimes">18:15</option>
+                                <option value="18:30" class="fromworktimes">18:30</option>
+                                <option value="18:45" class="fromworktimes">18:45</option>
+                                <option value="19:00" class="fromworktimes">19:00</option>
+                                <option value="19:15" class="fromworktimes">19:15</option>
+                                <option value="19:30" class="fromworktimes">19:30</option>
+                                <option value="19:45" class="fromworktimes">19:45</option>
+                                <option value="20:00" class="fromworktimes">20:00</option>
+                                <option value="20:15" class="fromworktimes">20:15</option>
+                                <option value="20:30" class="fromworktimes">20:30</option>
+                                <option value="20:45" class="fromworktimes">20:45</option>
+                                <option value="21:00" class="fromworktimes">21:00</option>
                             </select>
+                            <br>
+                            <span id="timeCheck" class="check">시간을 선택해주세요.</span>
+                            
 
                         </div>
+                        
                         <br>
-                        <div id="endTime">
+                        <!--<div id="endTime">
                             <div class="form-field">
                                 <div class="icon"><span class="ion-ios-calendar"></span></div>
 
@@ -130,7 +142,7 @@
                                 <br>
                                 <div id="routeTime"></div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <br>
@@ -138,20 +150,24 @@
                     <div>
                         <!--지도 div-->
                         <input type="text" id="startPoint" placeholder="검색어를 입력해주세요" value="">
-                        <input type="button" id="searchSP" onclick="searchPOI(countS+1);" value="지도검색">
+                        <input type="button" id="searchSP" onclick="searchPOI(countS+1);" value="출발지 검색">
 
                     </div>
                     <br>
 
                     <div>
                         <input type="text" id="endPoint" placeholder="검색어를 입력해주세요" value="">
-                        <input type="button" id="searchEP" onclick="searchPOIs(countE+1);" value="지도검색">
+                        <input type="button" id="searchEP" onclick="searchPOIs(countE+1);" value="도착지 검색">
                     </div>
                     <br>
                     출발지 : <input type="text" id="start" readonly><br>
                     도착지 : <input type="text" id="end" readonly>
+                    <br>
+                            <span id="routeCheck" class="check">출발지와 도착지를 검색해주세요.</span>
                     <br><br>
                     <input type="button" id="routesearch" onclick="route();" value="경로검색">
+                    <br>
+                            <span id="searchCheck" class="check">경로검색은 필수입니다.</span>
                     <br><br>
 
                     <div id="map_div">
@@ -173,7 +189,7 @@
                     <div class="col-lg align-self-end">
                         <div class="form-group">
                             <div class="form-field">
-                                <input type="submit" value="등록" class="form-control btn btn-primary">
+                                <input type="submit" value="등록" id="submit" class="form-control btn btn-primary">
                             </div>
                         </div>
                     </div>
@@ -203,8 +219,8 @@
                 $('.fromworktime').css('display', 'none');
                 $('.toworktimes').css('display', 'block');
                 $('.fromworktimes').css('display', 'none');
-                /*$('#tocommute').val("선택");
-                $('#tocommutes').val("선택");*/
+                $('#tocommute').val("선택");
+                $('#tocommutes').val("선택");
 
             }
         });
@@ -215,20 +231,23 @@
                 $('.fromworktime').css('display', 'block');
                 $('.toworktimes').css('display', 'none');
                 $('.fromworktimes').css('display', 'block');
-               /* $('#tocommute').val("선택");
+                $('#tocommute').val("선택");
                 $('#tocommutes').val("선택");
-*/
+
             }
         });
         
+         
         
-        $('#tocommutes').focusout(function(){
+        
+        
+       /* $('#tocommutes').focusout(function(){
         
             
-            /*if(  $('#tocommute option:selected').val() > $('#tocommutes option:selected').val() ){
+            if(  $('#tocommute option:selected').val() > $('#tocommutes option:selected').val() ){
                 alert('출발시간보다 이른시간은 선택하실 수 없습니다.');
                 return false;
-               }*/
+               }
           
             var towork = $('#tocommute option:selected').val();
             
@@ -241,7 +260,7 @@
             }
             
             
-        });
+        });*/
         
         /*$('#tocommutes').focusout(function(){
            alert('아');
@@ -703,4 +722,62 @@
         return false;
 
     });
-</script></html>
+    
+    
+    $('#submit').click(function(){
+        
+        
+         if($(':radio[name="work"]:checked').length < 1){
+                 $('#workCheck').css('display','block');   
+                return false;
+            }else{
+                $('#workCheck').css('display','none');      
+            }
+        
+        if($('#datepicker').val() == ""){
+                $('#dateCheck').css('display','block');   
+                return false;
+            }else{
+                $('#dateCheck').css('display','none');      
+            }
+        
+        if($('#tocommute').val()=="선택" || $('#tocommutes').val()=="선택"){
+            $('#timeCheck').css('display','block');   
+                return false;
+            }else{
+                $('#timeCheck').css('display','none');      
+            }    
+        
+                       
+         if($('#start').val()=="" || $('#end').val()==""){
+            $('#routeCheck').css('display','block');   
+                return false;
+            }else{
+                $('#routeCheck').css('display','none');      
+            }    
+        
+        
+        if($('#taxifare').val()==""){
+            $('#searchCheck').css('display','block');   
+                return false;
+            }else{
+                $('#searchCheck').css('display','none');      
+            } 
+        
+        
+          
+        
+        
+    });
+        
+                       
+                  
+                       
+       
+            
+        
+        
+    
+    
+</script>
+</html>

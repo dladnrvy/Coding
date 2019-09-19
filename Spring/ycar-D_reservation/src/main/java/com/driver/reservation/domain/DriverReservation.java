@@ -5,8 +5,8 @@ public class DriverReservation {
 	private int dr_idx; //운전자 예약번호
 	private int d_idx; //회원번호
 	private String d_date; //날짜
-	private int d_startTime; //출발시간
-	private int d_endTime; //도착시간
+	private String d_startTime; //출발시간
+	private String d_endTime; //도착시간
 	private String d_commute; //출퇴근
 	private String d_startPoint; //출발지
 	private String d_endPoint; //도착지
@@ -25,7 +25,7 @@ public class DriverReservation {
 	
 
 
-	public DriverReservation(int dr_idx, int d_idx, String d_date, int d_startTime, int d_endTime, String d_commute,
+	public DriverReservation(int dr_idx, int d_idx, String d_date, String d_startTime, String d_endTime, String d_commute,
 			String d_startPoint, String d_endPoint, int d_fee, int d_distance, String d_startlon, String d_startlat,
 			String d_endlon, String d_endlat) {
 		this.dr_idx = dr_idx;
@@ -122,19 +122,19 @@ public class DriverReservation {
 		this.d_date = d_date;
 	}
 
-	public int getD_startTime() {
+	public String getD_startTime() {
 		return d_startTime;
 	}
 
-	public void setD_startTime(int d_startTime) {
+	public void setD_startTime(String d_startTime) {
 		this.d_startTime = d_startTime;
 	}
 
-	public int getD_endTime() {
+	public String getD_endTime() {
 		return d_endTime;
 	}
 
-	public void setD_endTime(int d_endTime) {
+	public void setD_endTime(String d_endTime) {
 		this.d_endTime = d_endTime;
 	}
 

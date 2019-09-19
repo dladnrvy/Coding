@@ -5,30 +5,87 @@
     <title>리스트 출력</title>
 </head>
 <style>
-   /* #year{
+    #content{
+        margin: 0 auto;
+        max-width: 100%;
         text-align: center;
+        height: auto;
     }
-    #pastbutton{
-        display: inline;
+    
+    /*팝업창 css*/ 
+   #popupDiv {   
+    top : 0px;
+    position: absolute;
+    background: white;
+    border: 3px solid orange;
+    width: 500px;
+    height: 550px;
+    display: none;
+    padding-left: 10px;
+    }
+   /* 팝업 배경 css*/ 
+    #popup_mask {  
+        position: fixed;
+        width: 100%;
+        height: 1000px;
+        top: 0px;
+        left: 0px;
+         display: none; 
+         background-color:#000;
+        -moz-opacity: 0.8;
+        filter: alpha(opacity=80);
+         opacity: 0.8;
+    }
+    #popCloseBtn{
+        margin-left: 440px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 50px;
+        height: 30px;
+    }
+    
+   #year{
+        text-align: center;
     }
     #listdiv{
-        text-align: center;
-    }*/
-    /*#pastList{
-        float: right;
-    }*/
+        margin: 0 auto;
+        width: 100%; 
+    }
+    #list{
+        display: inline-block;
+        border: 1px solid #DDD;
+        margin-top: 20px;
+        overflow: scroll;
+        overflow-x: hidden;
+        width: 500px;
+        height: 500px;
+    }
+    .pastDiv{
+        text-align: left;
+        border: 1px solid #DDD;
+        width: 400px;
+        height: 30px;
+        line-height: 30px;
+        display: inline-block;
+    }
+    
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://apis.openapi.sk.com/tmap/js?version=1&format=javascript&appKey=61f9f7ec-2010-4d26-97e1-806dc10dce63"></script>
 <script>
+    
+    
+     var count = 0;
+    
+    
     $(document).ready(function(){
         
-    
+  
    
     $('#future').append(future);
 
         //리스트 none
-        $('#todayList').css('display','none');
+        /*$('#todayList').css('display','none');*/
         $('#futureList').css('display','none');
         $('#pastList').css('display','none');
         
@@ -70,7 +127,7 @@
                 var pasthtml = '';
                 var todayhtml = '';
                 var futurehtml = '';
-                var count = 0;
+                
             
                 
                 var pastlist = data.past;
@@ -80,17 +137,23 @@
                 
                 //과거
             for(var i=0; i<pastlist.length; i++){
+                
+                 var fee = pastlist[i].d_fee.toString();
+                
+                var feeCut = fee.substring(fee.length, fee.length-3);
                     
-                pasthtml += '날짜 : ' + pastlist[i].d_date +' <br>\n';
-                pasthtml += '출발시간 : ' + pastlist[i].d_startTime +' <br>\n';
-                pasthtml += '도착시간 : ' + pastlist[i].d_endTime +' <br>\n';
-                pasthtml += pastlist[i].d_commute +'<br>\n';
-                pasthtml += '출발장소 : ' + pastlist[i].d_startPoint +' <br>\n';
-                pasthtml += '도착장소 : ' + pastlist[i].d_endPoint +' <br>\n';
-                 pasthtml += '요금 : ' + pastlist[i].d_fee +' <br>\n';
-                pasthtml += '<button id="pastbutton" onclick="map('+ pastlist[i].d_startlon+', '+ pastlist[i].d_startlat+', ' + pastlist[i].d_endlon+', ' + pastlist[i].d_endlat +')">지도보기</button>';
-                pasthtml += '<button onclick="mapclose('+(count+1)+')">닫기</button>'+' <br>\n';
-                 
+                    var split = fee.split(feeCut);
+                    
+                    var feeSplit = split[0]+','+feeCut;
+                
+                pasthtml += '<div class="pastDiv">날짜 : ' + pastlist[i].d_date +'</div><br>\n';
+                pasthtml += '<div class="pastDiv">출발시간 : ' + pastlist[i].d_startTime +'</div> <br>\n';
+                pasthtml += '<div class="pastDiv">도착시간 : ' + pastlist[i].d_endTime +'</div> <br>\n';
+                pasthtml += '<div class="pastDiv">'+pastlist[i].d_commute +'</div><br>\n';
+                pasthtml += '<div class="pastDiv">출발장소 : ' + pastlist[i].d_startPoint +'</div> <br>\n';
+                pasthtml += '<div class="pastDiv">도착장소 : ' + pastlist[i].d_endPoint +'</div> <br>\n';
+                pasthtml += '<button id="popOpenBtn" onclick="map('+ pastlist[i].d_startlon+', '+ pastlist[i].d_startlat+', ' + pastlist[i].d_endlon+', ' + pastlist[i].d_endlat+')">지도보기</button>'+'<br>\n';
+                 pasthtml += '<div class="pastDiv">요금 : ' + feeSplit +'원</div><br>\n';  
                
               pasthtml += '<button onclick="deleteData('+pastlist[i].dr_idx+')">삭제하기</button>'+'<br><br>\n';   
                 
@@ -99,22 +162,40 @@
                 //현재
                 for(var i=0; i<todaylist.length; i++){
                     
+                     var fee = todaylist[i].d_fee.toString();
+                
+                var feeCut = fee.substring(fee.length, fee.length-3);
+                    
+                    var split = fee.split(feeCut);
+                    
+                    var feeSplit = split[0]+','+feeCut;
+                    
+                    
                 todayhtml += '날짜 : ' + todaylist[i].d_date +' <br>\n';
                 todayhtml += '출발시간 : ' + todaylist[i].d_startTime +' <br>\n';
                 todayhtml += '도착시간 : ' + todaylist[i].d_endTime +' <br>\n';
                 todayhtml += todaylist[i].d_commute +'<br>\n';
                 todayhtml += '출발장소 : ' + todaylist[i].d_startPoint +' <br>\n';
                 todayhtml += '도착장소 : ' + todaylist[i].d_endPoint +' <br>\n';
-                    todayhtml += '요금 : ' + todaylist[i].d_fee +' <br>\n';
-                todayhtml += '<button id="todaybutton" onclick="map('+ todaylist[i].d_startlon +', '+ todaylist[i].d_startlat+', '+ todaylist[i].d_endlon+', '+ todaylist[i].d_endlat+','+count+')">지도보기</button>'+'\n';
-                todayhtml += '<button onclick="mapclose('+(count+1)+')">닫기</button>'+' <br>\n';
-                    todayhtml += '<div id="map_div"></div>'+'<br><br>\n';
+                todayhtml += '<button id="popOpenBtn" onclick="map('+ todaylist[i].d_startlon +', '+ todaylist[i].d_startlat+', '+ todaylist[i].d_endlon+', '+ todaylist[i].d_endlat+')">지도보기</button>'+'<br>\n';
+                    todayhtml += '요금 : ' + feeSplit +'원 <br>\n';
                 
-               todayhtml += '<button onclick="deleteData('+todaylist[i].dr_idx+')">삭제하기</button>+'+'<br><br>\n';      
+               /* todayhtml += '<div id="map"></div>'+'<br>\n';
+                todayhtml += '<div id="mapmap"></div>'+'<br>\n';*/
+                
+               todayhtml += '<button onclick="deleteData('+todaylist[i].dr_idx+')">삭제하기</button>'+'<br><br>\n';      
                 
             }
                 //미래
                 for(var i=0; i<futurelist.length; i++){
+                    
+                    var fee = futurelist[i].d_fee.toString();
+                
+                var feeCut = fee.substring(fee.length, fee.length-3);
+                    
+                    var split = fee.split(feeCut);
+                    
+                    var feeSplit = split[0]+','+feeCut;
                     
                 futurehtml += '날짜 : ' + futurelist[i].d_date +' <br>\n';
                 futurehtml += '출발시간 : ' + futurelist[i].d_startTime +' <br>\n';
@@ -122,10 +203,8 @@
                 futurehtml += futurelist[i].d_commute +'<br>\n';
                 futurehtml += '출발장소 : ' + futurelist[i].d_startPoint +' <br>\n';
                 futurehtml += '도착장소 : ' + futurelist[i].d_endPoint +' <br>\n';
-                    futurehtml += '요금 : ' + futurelist[i].d_fee +' <br>\n';
-                futurehtml += '<button id="futurebutton" onclick="map('+ futurelist[i].d_startlon+', ' + futurelist[i].d_startlat+', ' + futurelist[i].d_endlon+', '+futurelist[i].d_endlat+','+count+')">지도 보기</button>'+'\n';
-                futurehtml += '<button onclick="mapclose('+(count+1)+')">닫기</button>'+' <br>\n';
-                    futurehtml += '<div id="map_div"></div>'+'<br><br>\n';
+                futurehtml += '<button id="popOpenBtn" onclick="map('+ futurelist[i].d_startlon+', ' + futurelist[i].d_startlat+', ' + futurelist[i].d_endlon+', '+futurelist[i].d_endlat+')">지도보기</button>'+'<br>\n';
+                futurehtml += '요금 : ' + feeSplit +'원 <br>\n';
                 
                 futurehtml += '<button onclick="deleteData('+futurelist[i].dr_idx+')">삭제하기</button>'+'<br><br>\n';     
                 
@@ -181,38 +260,97 @@
     });
         
       list();  
-     });   
+        
+        
+     
+    
+    });
+    
+   
         
         
         
-          function mapclose(count){
-                /*map.destroy();*/
-            
-            alert('닫기' + count);
-                 $('#map_div').remove();
-                 $('#pastbutton').css('display','block');
-                 $('#todaybutton').css('display','block');
-                 $('#futurebutton').css('display','block');
-            
-            return count;
+          function pastMapClose(count){
+              
+              
+              if(count == 0){
+                  var html = '<button id="closebutton" onclick="closebutton()">지도 닫기</button>';
+
+                $('#pastMapClose').append(html);
+    
+                 }                     
              };
+    
+        /*function pastMapClose(count){
+              
+              
+              if(count == 0){
+                  var html = '<button id="closebutton" onclick="closebutton()">지도 닫기</button>';
+
+                $('#pastMapClose').append(html);
+    
+                 }                     
+             };*/
+    
+           function closebutton(){
+                  
+                  
+               /*alert('삭제'+count);*/
+               
+                 $('#map_div').remove();
+               $('#closebutton').css('display','none');
+              };
         
         
     
     
-        function map(d_startlon,d_startlat,d_endlon,d_endlat,count){
+        function map(d_startlon,d_startlat,d_endlon,d_endlat){
             
-            alert(count);
+            $("#popupDiv").css({
+                "top": (($(window).height()-$("#popupDiv").outerHeight())/2+$(window).scrollTop())+"px",
+                "left": (($(window).width()-$("#popupDiv").outerWidth())/2+$(window).scrollLeft())+"px"
+                //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+             
+             }); 
+            
+            $("#popup_mask").css("display","block"); //팝업 뒷배경 display block
+            $("#popupDiv").css("display","block"); //팝업창 display block
+            
+            $("body").css("overflow","hidden");//body 스크롤바 없애기
             
             if(count == 1){
-               var html = '<div id="map_div"></div>';
-
-                $('#mapmap').append(html);
-               }
+                var html = '<div id="map_div"></div>';
+                $('#popupDiv').append(html);
+            }
+             
             
-            $('#pastbutton').css('display','none');
+            /*
+            $('#pastbutton').click(function(){
+                //과거 닫기버튼
+                pastMapClose(count);
+                 var html = '<div id="map_div"></div><br>';
+                $('#pastmap').append(html);
+            });
+            
+            $('#todaybutton').click(function(){
+                //과거 닫기버튼
+                pastMapClose(count);
+                 var html = '<div id="map_div"></div><br>';
+                $('#pastmap').append(html);
+            });*/
+            
+            /*$('#pastbutton').click(function(){
+                //과거 닫기버튼
+                pastMapClose(count);
+                 var html = '<div id="map_div"></div><br>';
+                $('#pastmap').append(html);
+            });*/
+            
+            
+           /*$('#closebutton').css('display','block');*/
+            /*$('#pastbutton').css('display','none');
             $('#todaybutton').css('display','none');
-            $('#futurebutton').css('display','none');
+            $('#futurebutton').css('display','none');*/
             
             /*alert("지도보기용 lonlat" + d_startlon +"  "+ d_startlat +"  "+ d_endlon +"  "+ d_endlat);*/
             
@@ -226,7 +364,7 @@
        
 		// map 생성
 		// Tmap.map을 이용하여, 지도가 들어갈 div, 넓이, 높이를 설정합니다.
-		map = new Tmap.Map({div:'map_div', width:'200px', height:'200px'});
+		map = new Tmap.Map({div:'map_div', width:'490px', height:'450px'});
 		var tData = new Tmap.TData();//REST API 에서 제공되는 경로, 교통정보, POI 데이터를 쉽게 처리할 수 있는 클래스입니다.
 		
 		var s_lonLat = new Tmap.LonLat(d_startlon, d_startlat); //시작 좌표입니다.   
@@ -268,8 +406,17 @@
             function onError(){
                 alert("오류가 발생했습니다. 죄송합니다.");
             }
-    
+                 
+                
            
+        $("#popCloseBtn").click(function(event){
+            $("#popup_mask").css("display","none"); //팝업창 뒷배경 display none
+            $("#popupDiv").css("display","none"); //팝업창 display none
+            $("body").css("overflow","auto");//body 스크롤바 생성
+            $('#map_div').remove();
+             count = 1;
+        });
+            
                 }
     
     //삭제
@@ -297,8 +444,8 @@
          });
         
     }
+   
     
-            
           
         
     
@@ -309,21 +456,34 @@
     
 </script>
 <body>
+  <div id="content">
    <div id="year">
    <button id="past"></button>
    <button id="today"></button>
     <button id="future"></button>
     </div>
     <div id="listdiv">
+    <div id="list">
     <br>
     
     <div id="pastList"></div>
     <div id="todayList"></div>
     <div id="futureList"></div>
-    <div id="mapmap"></div>
-    <div id="map_div"></div>
+    
+    
     
     </div>
+      </div>
+ 
+    <div id ="popup_mask" ></div> <!-- 팝업 배경 DIV -->
+    
+    <div id="popupDiv"> <!-- 팝업창 -->
+        <button id="popCloseBtn">닫기</button>
+        <div id="map_div"></div>
+    </div>
+        
+    </div>
+    
     
 </body>
     

@@ -30,17 +30,17 @@
 
 <!-- 과거 -->
 <select id="pastList" resultMap="drv">
-	select dr_idx,d_date,d_starttime,d_endtime,d_commute,d_startpoint,d_endpoint,d_fee,d_startlon,d_startlat,d_endlon,d_endlat from D_CARPOOL where  curdate() > d_date and d_idx = #{d_idx}
+	select dr_idx,d_date,d_starttime,d_endtime,d_commute,d_startpoint,d_endpoint,d_fee,d_startlon,d_startlat,d_endlon,d_endlat from D_CARPOOL where  curdate() > d_date and d_idx = #{d_idx} order by d_date desc
 </select>
 
 <!-- 미래 -->
 <select id="futureList" resultMap="drv">
-	select dr_idx,d_date,d_starttime,d_endtime,d_commute,d_startpoint,d_endpoint,d_fee,d_startlon,d_startlat,d_endlon,d_endlat from D_CARPOOL where d_date > curdate() and d_idx = #{d_idx}
+	select dr_idx,d_date,d_starttime,d_endtime,d_commute,d_startpoint,d_endpoint,d_fee,d_startlon,d_startlat,d_endlon,d_endlat from D_CARPOOL where d_date > curdate() and d_idx = #{d_idx} order by d_date desc
 </select>
 
 <!-- 현재 -->
 <select id="todayList" resultMap="drv">
-	select dr_idx,d_date,d_starttime,d_endtime,d_commute,d_startpoint,d_endpoint,d_fee,d_startlon,d_startlat,d_endlon,d_endlat from D_CARPOOL where d_date = curdate() and d_idx = #{d_idx}
+	select dr_idx,d_date,d_starttime,d_endtime,d_commute,d_startpoint,d_endpoint,d_fee,d_startlon,d_startlat,d_endlon,d_endlat from D_CARPOOL where d_date = curdate() and d_idx = #{d_idx} order by d_date desc
 </select>
 
 <delete id="deleteCarpoor">
