@@ -1,9 +1,6 @@
 package com.driver.reservation.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -53,11 +50,11 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/{d_idx}")
-	public Map<String, Object> SelectRV(
+	public List<DriverReservation> SelectRV(
 			@PathVariable("d_idx") int d_idx
 			) {
 		
-		Map<String, Object> drv = showlist.showListForDate(d_idx);
+		List<DriverReservation> drv = showlist.showListForDate(d_idx);
 				
 		System.out.println("검색하고자하는 idx는?" + d_idx);
 			

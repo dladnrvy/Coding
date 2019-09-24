@@ -21,28 +21,21 @@ public class ShowListService {
 
 	private DriverReservationDao dao;
 
-	public Map<String, Object> showListForDate(int d_idx) {
+	public List<DriverReservation> showListForDate(int d_idx) {
 		
 		
 		System.out.println("(서비스)검색하고자 하는 사람의 idx는" + d_idx);
 	
 		dao = template.getMapper(DriverReservationDao.class);
 		
-		Map<String, Object> thisdate = new HashMap<String, Object>();
+			
+		List<DriverReservation> test = dao.carpoolList(d_idx);
 		
-		List<DriverReservation> past = dao.pastList(d_idx);
 		
-		List<DriverReservation> today = dao.todayList(d_idx);
 		
-		List<DriverReservation> future = dao.futureList(d_idx);
-
-		thisdate.put("past", past);
-		thisdate.put("today", today);
-		thisdate.put("future", future);
+		System.out.println("서비스) 출력해봅니다 : "+test);
 		
-		System.out.println("서비스에서 map출력"+thisdate);
-		
-		return thisdate;
+		return test;
 	}
 
 	

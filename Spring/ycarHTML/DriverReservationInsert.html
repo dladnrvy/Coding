@@ -1,13 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Insert title here</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- 한글 폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    
+    <script src="https://apis.openapi.sk.com/tmap/js?version=1&format=javascript&appKey=61f9f7ec-2010-4d26-97e1-806dc10dce63"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+    
 </head>
 <style>
-    .check{
+    body {
+        background-color: #FFFEF4;
+       
+        
+    }
+    #ftco-nav{
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    row{
+         font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .check {
         display: none;
         color: red;
     }
+
+    .mb-4 {
+
+        margin-top: 100px;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    .ftco-navbar-light.scrolled{
+        background-color: #FFFEF4 !important;
+    }
+    
+    .form-control btn btn-primary{
+        font-weight: bold;
+        color: aqua;
+        height: 100px;
+    }
+    .col-lg align-items-end{
+        padding: 0px 0px;
+    }
+    
+    #ha{
+        height: 100%;
+    }
+    
+    
+    
+    /*.form-control btn btn-primary:hover{
+         background-color: white;
+        color: aqua;
+        
+    }*/
+
+    /* #container{
+        margin-top: 50px;
+    }
+    */
     /*.form-group {
         display: inline;
         margin: 20px;
@@ -31,186 +106,254 @@
         margin: 10px;
     }*/
 </style>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://apis.openapi.sk.com/tmap/js?version=1&format=javascript&appKey=61f9f7ec-2010-4d26-97e1-806dc10dce63"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<body>
-    <form id="rvForm" class="search-property-1">
-        <div class="row">
-            <div id="date">
-                <div class="col-lg align-items-end">
-                    <div class="form-group">
-                        <label for="#">Commute</label>
-                        <div class="form-field">
-                            <!--출퇴근 value-->
-                            <div class="icon"><span class="ion-ios-search"></span></div>
-                            <input type="radio" id="towork" name="work" class="work" value="출근">출근
-                            <input type="radio" id="fromwork" name="work" class="work" value="퇴근">퇴근
-                            <br>
-                            <span id="workCheck" class="check">출근 또는 퇴근을 선택해주세요.</span>
 
-                        </div>
-                    </div>
+    
+
+<body  data-target=".site-navbar-target" data-offset="300">
+
+<div id="ha">
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">YCAR</a>
+            <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav nav ml-auto">
+                    <li class="nav-item"><a href="#" class="nav-link"><span>카풀등록</span></a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><span>카풀요청</span></a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><span>나의카풀</span></a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><span>결제</span></a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><span>후기</span></a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><span>마이페이지</span></a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><span>로그아웃</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    <section class="ftco-section ftco-no-pb ftco-no-pt">
+        <div class="container">
+            <div class="row justify-content-center pb-0 pb-mb-5 pt-5 pt-md-0">
+                <div class="col-md-12 heading-section ftco-animate">
+
+                    <h2 class="mb-4">카풀등록
+                    </h2>
+
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="search-wrap-1 ftco-animate p-4">
+                        <form action="#" class="search-property-1">
+                            <div id="row">
+                                <div class="col-lg align-items-end">
+                                    <div class="form-group">
+                                        <label for="#">Commute</label>
+                                        <div class="form-field">
+                                        
+                                            <input type="radio" id="towork" name="work" class="work" value="출근">출근
+                                            <input type="radio" id="fromwork" name="work" class="work" value="퇴근">퇴근
+                                            <br>
+                                            <span id="workCheck" class="check">출근 또는 퇴근을 선택해주세요.</span>
 
-                <div class="col-lg align-items-end">
-                    <div class="form-group">
-                        <label for="#">Date</label>
-                        <div class="form-field">
-                            <div class="icon"><span class="ion-ios-calendar"></span></div>
-                            <!--날짜 value-->
-                            <input type="text" class="form-control checkin_date" placeholder="날짜를 선택해주세요" id="datepicker" name="p_date">
-                            <br>
-                            <span id="dateCheck" class="check">날짜를 선택해주세요.</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg align-items-end">
-                    <div class="form-group">
-                        <label for="#">픽업가능시간</label>
-                        <div class="form-field">
-                            <div class="icon"><span class="ion-ios-calendar"></span></div>
-                            <!--시간 value-->
-                            <select name="commute" id="tocommute" class="form-control">
-                                <option hidden>선택</option>
-                                <option value="07:00" class="toworktime">07:00</option>
-                                <option value="07:15" class="toworktime">07:15</option>
-                                <option value="07:30" class="toworktime">07:30</option>
-                                <option value="07:45" class="toworktime">07:45</option>
-                                <option value="08:00" class="toworktime">08:00</option>
-                                <option value="08:15" class="toworktime">08:15</option>
-                                <option value="08:30" class="toworktime">08:30</option>
-                                <option value="08:45" class="toworktime">08:45</option>
-                                <option value="09:00" class="toworktime">09:00</option>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <option value="18:00" class="fromworktime">18:00</option>
-                                <option value="18:15" class="fromworktime">18:15</option>
-                                <option value="18:30" class="fromworktime">18:30</option>
-                                <option value="18:45" class="fromworktime">18:45</option>
-                                <option value="19:00" class="fromworktime">19:00</option>
-                                <option value="19:15" class="fromworktime">19:15</option>
-                                <option value="19:30" class="fromworktime">19:30</option>
-                                <option value="19:30" class="fromworktime">19:45</option>
-                                <option value="20:00" class="fromworktime">20:00</option>
-                            </select>
-                            ~
+                                <div class="col-lg align-items-end">
+                                    <div class="form-group">
+                                        <label for="#">탑승일</label>
+                                        <div class="form-field">
+                                            <!--<div class="icon"><span class="ion-ios-calendar"></span></div>-->
+                                            <!--날짜 value-->
+                                            <input type="text" class="form-control checkin_date" placeholder="날짜를 선택해주세요" id="datepicker" name="p_date">
+                                            
+                                            <span id="dateCheck" class="check">날짜를 선택해주세요.</span>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <!--시간 value-->
-                            <select name="commute" id="tocommutes" class="form-control">
-                                <option hidden>선택</option>
-                                <option value="07:15" class="toworktimes">07:15</option>
-                                <option value="07:30" class="toworktimes">07:30</option>
-                                <option value="07:45" class="toworktimes">07:45</option>
-                                <option value="08:00" class="toworktimes">08:00</option>
-                                <option value="08:15" class="toworktimes">08:15</option>
-                                <option value="08:30" class="toworktimes">08:30</option>
-                                <option value="08:45" class="toworktimes">08:45</option>
-                                <option value="09:00" class="toworktimes">09:00</option>
-                                <option value="09:15" class="toworktimes">09:15</option>
-                                <option value="09:30" class="toworktimes">09:30</option>
-                                <option value="09:45" class="toworktimes">09:45</option>
-                                <option value="10:00" class="toworktimes">10:00</option>
 
-                                
-                                <option value="18:15" class="fromworktimes">18:15</option>
-                                <option value="18:30" class="fromworktimes">18:30</option>
-                                <option value="18:45" class="fromworktimes">18:45</option>
-                                <option value="19:00" class="fromworktimes">19:00</option>
-                                <option value="19:15" class="fromworktimes">19:15</option>
-                                <option value="19:30" class="fromworktimes">19:30</option>
-                                <option value="19:45" class="fromworktimes">19:45</option>
-                                <option value="20:00" class="fromworktimes">20:00</option>
-                                <option value="20:15" class="fromworktimes">20:15</option>
-                                <option value="20:30" class="fromworktimes">20:30</option>
-                                <option value="20:45" class="fromworktimes">20:45</option>
-                                <option value="21:00" class="fromworktimes">21:00</option>
-                            </select>
-                            <br>
-                            <span id="timeCheck" class="check">시간을 선택해주세요.</span>
-                            
 
-                        </div>
-                        
-                        <br>
-                        <!--<div id="endTime">
-                            <div class="form-field">
-                                <div class="icon"><span class="ion-ios-calendar"></span></div>
 
-                                <div class="icon"><span class="ion-ios-calendar"></span></div>
-                                <br>
-                                <div id="routeTime"></div>
+
                             </div>
-                        </div>-->
-                    </div>
-                </div>
-                <br>
-                <div id="map">
-                    <div>
-                        <!--지도 div-->
-                        <input type="text" id="startPoint" placeholder="검색어를 입력해주세요" value="">
-                        <input type="button" id="searchSP" onclick="searchPOI(countS+1);" value="출발지 검색">
+                            <div class="col-lg align-items-end">
+                                <div class="form-group">
+                                    <label for="#">픽업가능시간</label>
+                                    <div class="form-field">
+                                        <div class="icon"><span class="ion-ios-calendar"></span></div>
+                                        <!--시간 value-->
+                                        <select name="commute" id="tocommute" class="form-control">
+                                            <option hidden>선택</option>
+                                            <option value="07:00" class="toworktime">07:00</option>
+                                            <option value="07:15" class="toworktime">07:15</option>
+                                            <option value="07:30" class="toworktime">07:30</option>
+                                            <option value="07:45" class="toworktime">07:45</option>
+                                            <option value="08:00" class="toworktime">08:00</option>
+                                            <option value="08:15" class="toworktime">08:15</option>
+                                            <option value="08:30" class="toworktime">08:30</option>
+                                            <option value="08:45" class="toworktime">08:45</option>
+                                            <option value="09:00" class="toworktime">09:00</option>
 
-                    </div>
-                    <br>
+                                            <option value="18:00" class="fromworktime">18:00</option>
+                                            <option value="18:15" class="fromworktime">18:15</option>
+                                            <option value="18:30" class="fromworktime">18:30</option>
+                                            <option value="18:45" class="fromworktime">18:45</option>
+                                            <option value="19:00" class="fromworktime">19:00</option>
+                                            <option value="19:15" class="fromworktime">19:15</option>
+                                            <option value="19:30" class="fromworktime">19:30</option>
+                                            <option value="19:30" class="fromworktime">19:45</option>
+                                            <option value="20:00" class="fromworktime">20:00</option>
+                                        </select>
+                                        ~
 
-                    <div>
-                        <input type="text" id="endPoint" placeholder="검색어를 입력해주세요" value="">
-                        <input type="button" id="searchEP" onclick="searchPOIs(countE+1);" value="도착지 검색">
-                    </div>
-                    <br>
-                    출발지 : <input type="text" id="start" readonly><br>
-                    도착지 : <input type="text" id="end" readonly>
-                    <br>
-                            <span id="routeCheck" class="check">출발지와 도착지를 검색해주세요.</span>
-                    <br><br>
-                    <input type="button" id="routesearch" onclick="route();" value="경로검색">
-                    <br>
-                            <span id="searchCheck" class="check">경로검색은 필수입니다.</span>
-                    <br><br>
+                                        <!--시간 value-->
+                                        <select name="commute" id="tocommutes" class="form-control">
+                                            <option hidden>선택</option>
+                                            <option value="07:15" class="toworktimes">07:15</option>
+                                            <option value="07:30" class="toworktimes">07:30</option>
+                                            <option value="07:45" class="toworktimes">07:45</option>
+                                            <option value="08:00" class="toworktimes">08:00</option>
+                                            <option value="08:15" class="toworktimes">08:15</option>
+                                            <option value="08:30" class="toworktimes">08:30</option>
+                                            <option value="08:45" class="toworktimes">08:45</option>
+                                            <option value="09:00" class="toworktimes">09:00</option>
+                                            <option value="09:15" class="toworktimes">09:15</option>
+                                            <option value="09:30" class="toworktimes">09:30</option>
+                                            <option value="09:45" class="toworktimes">09:45</option>
+                                            <option value="10:00" class="toworktimes">10:00</option>
 
-                    <div id="map_div">
-                    </div>
-                    <input type="hidden" id="startlon" value="">
-                    <input type="hidden" id="startlat" value="">
-                    <input type="hidden" id="endlon" value="">
-                    <input type="hidden" id="endlat" value="">
 
-                    <input type="hidden" id="distance" value="">
-                    <input type="hidden" id="time" value="">
-                    <input type="hidden" id="fare" value="">
-                    <input type="hidden" id="taxifare" value="">
+                                            <option value="18:15" class="fromworktimes">18:15</option>
+                                            <option value="18:30" class="fromworktimes">18:30</option>
+                                            <option value="18:45" class="fromworktimes">18:45</option>
+                                            <option value="19:00" class="fromworktimes">19:00</option>
+                                            <option value="19:15" class="fromworktimes">19:15</option>
+                                            <option value="19:30" class="fromworktimes">19:30</option>
+                                            <option value="19:45" class="fromworktimes">19:45</option>
+                                            <option value="20:00" class="fromworktimes">20:00</option>
+                                            <option value="20:15" class="fromworktimes">20:15</option>
+                                            <option value="20:30" class="fromworktimes">20:30</option>
+                                            <option value="20:45" class="fromworktimes">20:45</option>
+                                            <option value="21:00" class="fromworktimes">21:00</option>
+                                        </select>
+                                        <br>
+                                        <span id="timeCheck" class="check">시간을 선택해주세요.</span>
 
-                    <p id="result"></p>
-                    <!--지도 div끝-->
-                    <br>
 
-                    <div class="col-lg align-self-end">
-                        <div class="form-group">
-                            <div class="form-field">
-                                <input type="submit" value="등록" id="submit" class="form-control btn btn-primary">
+                                    </div>
+
+                                    <div id="map" >
+                                        <div>
+                                            <!--지도 div-->
+                                            <input type="text" class="form-control checkin_date" id="startPoint" placeholder="검색어를 입력해주세요" value="">
+                                            <input type="button" class="btn btn-primary" id="searchSP" onclick="searchPOI(countS+1);" value="출발지 검색">
+
+                                        </div>
+                                        <br>
+
+                                        <div>
+                                            <input type="text" class="form-control checkin_date" id="endPoint" placeholder="검색어를 입력해주세요" value="">
+                                            <input type="button" class="btn btn-primary" id="searchEP" onclick="searchPOIs(countE+1);" value="도착지 검색">
+                                        </div>
+                                        <br>
+                                        출발지 : <input type="text" class="form-control checkin_date" id="start" readonly><br>
+                                        도착지 : <input type="text" class="form-control checkin_date" id="end" readonly>
+                                        <br>
+                                        <span id="routeCheck" class="check">출발지와 도착지를 검색해주세요.</span>
+                                        <br><br>
+                                        <input type="button" class="btn btn-primary" id="routesearch" onclick="route();" value="경로검색">
+                                        <br>
+                                        <span id="searchCheck" class="check">경로검색은 필수입니다.</span>
+                                        <br><br>
+
+                                        <div id="map_div">
+                                        </div>
+                                        <input type="hidden" id="startlon" value="">
+                                        <input type="hidden" id="startlat" value="">
+                                        <input type="hidden" id="endlon" value="">
+                                        <input type="hidden" id="endlat" value="">
+
+                                        <input type="hidden" id="distance" value="">
+                                        <input type="hidden" id="time" value="">
+                                        <input type="hidden" id="fare" value="">
+                                        <input type="hidden" id="taxifare" value="">
+
+                                        <!--<p id="result"></p>-->
+                                        <!--지도 div끝-->
+                                        <br>
+
+                                        <!--<div class="col-lg align-self-end">-->
+                                            <div class="form-group">
+                                                <div class="form-field">
+                                                    <input type="submit" value="등록" id="submit" class="btn btn-primary">
+                                                    <br>
+                                                </div>
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+
+
+                                </div>
                             </div>
-                        </div>
+
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
-</body>
+    </section>
+    </div>
 
+
+
+
+
+
+
+
+   
+
+
+</body>
+     
+  <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/scrollax.min.js"></script>
+
+    <script src="js/main.js"></script>
+      
 <script>
+    
     //운전자 idx 값
     var d_idx = 2;
+   
 
-    $(function() {
+   $(document).ready(function() {
         //지도 맵띄우기
         initTmap();
 
         //날짜 api
-        $("#datepicker").datepicker({
-           dateFormat: 'yy-mm-dd' 
-        });
+       
+    $("#datepicker").datepicker();
+  
+        
 
         //출퇴근에 따른 변화
         $('#towork').change(function() {
@@ -236,40 +379,40 @@
 
             }
         });
-        
-         
-        
-        
-        
-       /* $('#tocommutes').focusout(function(){
-        
-            
-            if(  $('#tocommute option:selected').val() > $('#tocommutes option:selected').val() ){
-                alert('출발시간보다 이른시간은 선택하실 수 없습니다.');
-                return false;
-               }
-          
-            var towork = $('#tocommute option:selected').val();
-            
-            var fromwork = $('#tocommutes option:selected').val();
-          
-            
-            if(towork > fromwork){
 
-                (towork > toworks).css('display','none');
-            }
-            
-            
-        });*/
-        
+
+
+
+
+        /* $('#tocommutes').focusout(function(){
+         
+             
+             if(  $('#tocommute option:selected').val() > $('#tocommutes option:selected').val() ){
+                 alert('출발시간보다 이른시간은 선택하실 수 없습니다.');
+                 return false;
+                }
+           
+             var towork = $('#tocommute option:selected').val();
+             
+             var fromwork = $('#tocommutes option:selected').val();
+           
+             
+             if(towork > fromwork){
+
+                 (towork > toworks).css('display','none');
+             }
+             
+             
+         });*/
+
         /*$('#tocommutes').focusout(function(){
            alert('아');
                 
         });*/
-        
-        
-        
-        
+
+
+
+
     });
 
     //--------지도 시작---------
@@ -307,12 +450,12 @@
     function searchPOI(countS) {
 
         var startPoint = $('#startPoint').val();
-        
-        if(startPoint == ""){
-                alert('검색하고자 하는 곳을 입력해주세요.');
+
+        if (startPoint == "") {
+            alert('검색하고자 하는 곳을 입력해주세요.');
             $('#startPoint').focus();
             return;
-            }
+        }
 
         tdata = new Tmap.TData();
         tdata.getPOIDataFromSearch(encodeURIComponent(startPoint), {
@@ -401,12 +544,12 @@
     function searchPOIs(countE) {
 
         var endPoint = $('#endPoint').val();
-        
-        if(endPoint == ""){
-                alert('검색하고자 하는 곳을 입력해주세요.');
+
+        if (endPoint == "") {
+            alert('검색하고자 하는 곳을 입력해주세요.');
             $('#endPoint').focus();
             return;
-            }
+        }
 
 
         alert(endPoint);
@@ -423,8 +566,8 @@
         //재검색시 맵초기화
         if (countE > 0) {
             $('#searchEP').click(function() {
-                
-                
+
+
                 map.events.clearMouseCache();
                 map.destroy();
                 initTmap();
@@ -509,7 +652,7 @@
         $('#start').val(labelHtml.toString());
         $('#startlon').val(lonlat.lon.toString());
         $('#startlat').val(lonlat.lat.toString());
-        
+
 
         map.events.clearMouseCache();
         map.destroy();
@@ -532,7 +675,7 @@
         $('#end').val(labelHtml.toString());
         $('#endlon').val(lonlat.lon.toString());
         $('#endlat').val(lonlat.lat.toString());
-        
+
         map.events.clearMouseCache();
         map.destroy();
 
@@ -580,12 +723,12 @@
 
                 console.log(xmlDoc);
 
-                var tDistance = /*" 총 거리 : " +*/ ($intRate[0].getElementsByTagName("tmap:totalDistance")[0].childNodes[0].nodeValue / 1000).toFixed(1) /*+ "km,"*/;
-                var tTime = ($intRate[0].getElementsByTagName("tmap:totalTime")[0].childNodes[0].nodeValue / 60).toFixed(0) /*+ "분"*/;
-                var tFare = /*" 톨 게이트 비용 : " +*/ $intRate[0].getElementsByTagName("tmap:totalFare")[0].childNodes[0].nodeValue /*+ "원,"*/;
-                var taxiFare = /*" 예상 택시 요금 : " +*/ $intRate[0].getElementsByTagName("tmap:taxiFare")[0].childNodes[0].nodeValue /*+ "원"*/;
-                
-              
+                var tDistance = /*" 총 거리 : " +*/ ($intRate[0].getElementsByTagName("tmap:totalDistance")[0].childNodes[0].nodeValue / 1000).toFixed(1) /*+ "km,"*/ ;
+                var tTime = ($intRate[0].getElementsByTagName("tmap:totalTime")[0].childNodes[0].nodeValue / 60).toFixed(0) /*+ "분"*/ ;
+                var tFare = /*" 톨 게이트 비용 : " +*/ $intRate[0].getElementsByTagName("tmap:totalFare")[0].childNodes[0].nodeValue /*+ "원,"*/ ;
+                var taxiFare = /*" 예상 택시 요금 : " +*/ $intRate[0].getElementsByTagName("tmap:taxiFare")[0].childNodes[0].nodeValue /*+ "원"*/ ;
+
+
 
                 /*$("#result").text(tDistance + tTime + tFare + taxiFare);*/
                 $('#routeTime').text('약 ' + tTime + '분 정도 걸리는 거리입니다.');
@@ -671,16 +814,16 @@
 
         });
 
-        
-                console.log($('#datepicker').val());
-                 console.log($("input:radio[name='work']:checked").val());
-                 console.log( $('#tocommute').val());
-                 console.log( $('#tocommutes').val());
-                console.log( $('#start').val());
-                 console.log( $('#end').val());
-                 console.log( $('#taxifare').val());
-                  console.log($('#distance').val());
-      
+
+        console.log($('#datepicker').val());
+        console.log($("input:radio[name='work']:checked").val());
+        console.log($('#tocommute').val());
+        console.log($('#tocommutes').val());
+        console.log($('#start').val());
+        console.log($('#end').val());
+        console.log($('#taxifare').val());
+        console.log($('#distance').val());
+
 
     }
     //--------지도 끝---------
@@ -696,12 +839,12 @@
                 d_date: $('#datepicker').val().toString(),
                 d_commute: $("input:radio[name='work']:checked").val().toString(),
                 d_startTime: $('#tocommute').val(),
-                d_endTime : $('#tocommutes').val(),
-                d_startPoint : $('#start').val().toString(),
-                 d_endPoint : $('#end').val().toString(),
-                 d_fee : $('#taxifare').val(),
-                 d_distance : $('#distance').val(),
-                 d_startlon: $('#startlon').val(),
+                d_endTime: $('#tocommutes').val(),
+                d_startPoint: $('#start').val().toString(),
+                d_endPoint: $('#end').val().toString(),
+                d_fee: $('#taxifare').val(),
+                d_distance: $('#distance').val(),
+                d_startlon: $('#startlon').val(),
                 d_startlat: $('#startlat').val(),
                 d_endlon: $('#endlon').val(),
                 d_endlat: $('#endlat').val()
@@ -722,62 +865,53 @@
         return false;
 
     });
-    
-    
-    $('#submit').click(function(){
-        
-        
-         if($(':radio[name="work"]:checked').length < 1){
-                 $('#workCheck').css('display','block');   
-                return false;
-            }else{
-                $('#workCheck').css('display','none');      
-            }
-        
-        if($('#datepicker').val() == ""){
-                $('#dateCheck').css('display','block');   
-                return false;
-            }else{
-                $('#dateCheck').css('display','none');      
-            }
-        
-        if($('#tocommute').val()=="선택" || $('#tocommutes').val()=="선택"){
-            $('#timeCheck').css('display','block');   
-                return false;
-            }else{
-                $('#timeCheck').css('display','none');      
-            }    
-        
-                       
-         if($('#start').val()=="" || $('#end').val()==""){
-            $('#routeCheck').css('display','block');   
-                return false;
-            }else{
-                $('#routeCheck').css('display','none');      
-            }    
-        
-        
-        if($('#taxifare').val()==""){
-            $('#searchCheck').css('display','block');   
-                return false;
-            }else{
-                $('#searchCheck').css('display','none');      
-            } 
-        
-        
-          
-        
-        
+
+
+    $('#submit').click(function() {
+
+
+        if ($(':radio[name="work"]:checked').length < 1) {
+            $('#workCheck').css('display', 'block');
+            return false;
+        } else {
+            $('#workCheck').css('display', 'none');
+        }
+
+        if ($('#datepicker').val() == "") {
+            $('#dateCheck').css('display', 'block');
+            return false;
+        } else {
+            $('#dateCheck').css('display', 'none');
+        }
+
+        if ($('#tocommute').val() == "선택" || $('#tocommutes').val() == "선택") {
+            $('#timeCheck').css('display', 'block');
+            return false;
+        } else {
+            $('#timeCheck').css('display', 'none');
+        }
+
+
+        if ($('#start').val() == "" || $('#end').val() == "") {
+            $('#routeCheck').css('display', 'block');
+            return false;
+        } else {
+            $('#routeCheck').css('display', 'none');
+        }
+
+
+        if ($('#taxifare').val() == "") {
+            $('#searchCheck').css('display', 'block');
+            return false;
+        } else {
+            $('#searchCheck').css('display', 'none');
+        }
+
+
+
+
+
     });
-        
-                       
-                  
-                       
-       
-            
-        
-        
-    
-    
 </script>
+
 </html>
