@@ -4,6 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,11 +17,11 @@ public class ReservationEntity {
 	@Id
 	@Column
 	private long r_idx;
+
+	@Column(nullable = false)
+	private int p_idx;
 	
-	@JoinColumn(length = 10, nullable = false)
-	private PassengerEntity p_idx;
-	
-	@Column(length = 10, nullable = false)
+	@Column(nullable = false)
 	private int dr_idx;
 	
 	@Column(length = 1, nullable = false)
@@ -60,6 +64,7 @@ public class ReservationEntity {
 		return "ReservationEntity [r_idx=" + r_idx + ", p_idx=" + p_idx + ", dr_idx=" + dr_idx + ", r_confirm="
 				+ r_confirm + "]";
 	}
+	
 	
 	
 	

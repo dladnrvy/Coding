@@ -42,8 +42,7 @@
         top: 0px;
         position: absolute;
         background: white;
-
-        width: 500px;
+        width: 510px;
         height: 550px;
         display: none;
         padding-left: 10px;
@@ -75,6 +74,11 @@
         text-align: center;
     }
 
+    /*예약된 카풀*/
+    #yearalllist {
+        text-align: center;
+    }
+
     #listdiv {
         margin: 0 auto;
         width: 100%;
@@ -87,8 +91,26 @@
         overflow: scroll;
         overflow-x: hidden;
         width: 500px;
-        height: 600px;
+        height: 500px;
     }
+
+    /*예약된 카풀*/
+    #allListdiv {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    /*예약된 카풀*/
+    #allList {
+        display: inline-block;
+        border: 1px solid #DDD;
+        margin-top: 20px;
+        overflow: scroll;
+        overflow-x: hidden;
+        width: 500px;
+        height: 500px;
+    }
+
 
     .pastDiv {
         text-align: left;
@@ -132,6 +154,25 @@
         width: 100px;
         height: 40px;
     }
+
+    /*예약된 카풀*/
+    #pastAllButton {
+        width: 100px;
+        height: 40px;
+    }
+
+    /*예약된 카풀*/
+    #todayAllButton {
+        width: 100px;
+        height: 40px;
+    }
+
+    /*예약된 카풀*/
+    #futureAllButton {
+        width: 100px;
+        height: 40px;
+    }
+
 
     span {
         color: black;
@@ -236,45 +277,41 @@
 
 
 
-        $('#future').append(future);
+
 
         //리스트 none
         /*$('#todayList').css('display','none');*/
         $('#futureList').css('display', 'none');
         $('#pastList').css('display', 'none');
 
+        $('#futureAllList').css('display', 'none');
+        $('#pastAllList').css('display', 'none');
+
+        var d = new Date();
+
+        var thisyear = d.getFullYear() + "년";
+
+        //오늘
+        var today = (d.getMonth() + 1) + "/" + d.getDate();
+
+        //과거
+        var past = "~" + (d.getMonth() + 1) + "/" + (d.getDate() - 1);
+
+        //미래
+        var future = (d.getMonth() + 1) + "/" + (d.getDate() + 1) + "~";
+
+        var thisday = d.getFullYear() + "-" + "0" + (d.getMonth() + 1) + "-" + d.getDate();
 
 
         function list() {
-
-            var d = new Date();
-
-            var thisyear = d.getFullYear() + "년";
-
-            //오늘
-            var today = (d.getMonth() + 1) + "/" + d.getDate();
-
-            //과거
-            var past = "~" + (d.getMonth() + 1) + "/" + (d.getDate() - 1);
-
-            //미래
-            var future = (d.getMonth() + 1) + "/" + (d.getDate() + 1) + "~";
-
-            var thisday = d.getFullYear() + "-" + "0" + (d.getMonth() + 1) + "-" + d.getDate();
 
             $('#thisyear').append(thisyear);
             $('#past').append(past);
             $('#today').append(today);
             $('#future').append(future);
 
-
-
-
-
-
-
             $.ajax({
-                url: 'http://localhost:8080/reservation/rvInsert/' + 2,
+                url: 'http://localhost:8080/reservation/carpool/Y/' + 2,
                 type: 'GET',
                 success: function(data) {
 
@@ -287,19 +324,7 @@
                     var pastlist = data.past;
                     var todaylist = data.today;
                     var futurelist = data.future;
-                    var testlist = data.test;
 
-                    var pastlists = data.pastY;
-
-
-
-                    /*  for(var i = 0; i < pastlists.length; i++){
-                          console.log(pastlists[i].d_date);
-                      }
-                      */
-
-                    console.log(testlist);
-                    
 
                     //과거
                     for (var i = 0; i < data.length; i++) {
@@ -313,22 +338,14 @@
                         var feeSplit = split[0] + ',' + feeCut;
 
 
-                        
-                       
 
-                        console.log("날짜 : " + data[i].d_date);
-                        console.log("오늘 : " + thisday);
+
 
                         if (data[i].d_date < thisday) {
-                            
+
                             pasthtml += '<div class="pastDiv">';
                             pasthtml += '<span class="CommuteSPAN">' + data[i].d_commute + '</span><br>\n';
-                            
-                            if (data[i].r_confirm == "Y") {
-                            pasthtml += '<span>' + data[i].nickname + '</span><br>\n';
-                            
-                            }
-                            
+                            pasthtml += '<span>예약자 닉네임 : ' + data[i].nickname + '</span><br>\n';
                             pasthtml += '<span class="DateSPAN">날짜 : ' + '</span>' + data[i].d_date + '<br>\n';
                             pasthtml += '<span class="STimeSPAN">출발시간 : ' + '</span>' + data[i].d_startTime + ' <br>\n';
                             pasthtml += '<span class="ETimeSPAN">도착시간 : </span>' + data[i].d_endTime + '<br>\n';
@@ -339,18 +356,13 @@
 
                             pasthtml += '<button class="btn btn-primary" id="pastdelBTN"  onclick="deleteData(' + data[i].dr_idx + ')">삭제하기</button>' + '<br><br>\n';
                             pasthtml += '</div>';
-                        
+
                             //오늘
-                        }else if (data[i].d_date == thisday) {
-                            
+                        } else if (data[i].d_date == thisday) {
+
                             todayhtml += '<div class="pastDiv">';
                             todayhtml += '<span class="CommuteSPAN">' + data[i].d_commute + '</span><br>\n';
-                            
-                            if (data[i].r_confirm == "Y") {
-                            todayhtml += '<span>' + data[i].nickname + '</span><br>\n';
-                            
-                            }
-                            
+                            todayhtml += '<span>예약자 닉네임 : ' + data[i].nickname + '</span><br>\n';
                             todayhtml += '<span class="DateSPAN">날짜 : ' + '</span>' + data[i].d_date + '<br>\n';
                             todayhtml += '<span class="STimeSPAN">출발시간 : ' + '</span>' + data[i].d_startTime + ' <br>\n';
                             todayhtml += '<span class="ETimeSPAN">도착시간 : </span>' + data[i].d_endTime + '<br>\n';
@@ -361,18 +373,13 @@
 
                             todayhtml += '<button class="btn btn-primary" id="pastdelBTN"  onclick="deleteData(' + data[i].dr_idx + ')">삭제하기</button>' + '<br><br>\n';
                             todayhtml += '</div>';
-                            
+
                             //미래
                         } else if (data[i].d_date > thisday) {
-                            
+
                             futurehtml += '<div class="pastDiv">';
                             futurehtml += '<span class="CommuteSPAN">' + data[i].d_commute + '</span><br>\n';
-                            
-                            if (data[i].r_confirm == "Y") {
-                            futurehtml += '<span>' + data[i].nickname + '</span><br>\n';
-                            
-                            }
-                            
+                            futurehtml += '<span>예약자 닉네임 : ' + data[i].nickname + '</span><br>\n';
                             futurehtml += '<span class="DateSPAN">날짜 : ' + '</span>' + data[i].d_date + '<br>\n';
                             futurehtml += '<span class="STimeSPAN">출발시간 : ' + '</span>' + data[i].d_startTime + ' <br>\n';
                             futurehtml += '<span class="ETimeSPAN">도착시간 : </span>' + data[i].d_endTime + '<br>\n';
@@ -384,13 +391,8 @@
                             futurehtml += '<button class="btn btn-primary" id="pastdelBTN"  onclick="deleteData(' + data[i].dr_idx + ')">삭제하기</button>' + '<br><br>\n';
                             futurehtml += '</div>';
                         }
-                        
-
-
-
 
                     }
-                   
 
                     $('#pastList').html(pasthtml);
                     $('#todayList').html(todayhtml);
@@ -404,6 +406,126 @@
 
         };
 
+        function allList() {
+
+
+
+            $('#thisyear').append(thisyear);
+            $('#pastAllButton').append(past);
+            $('#todayAllButton').append(today);
+            $('#futureAllButton').append(future);
+
+
+            $.ajax({
+                url: 'http://localhost:8080/reservation/carpool/' + 2,
+                type: 'GET',
+                success: function(data) {
+
+                    var pasthtml = '';
+                    var todayhtml = '';
+                    var futurehtml = '';
+
+                    var pastlist = data.past;
+                    var todaylist = data.today;
+                    var futurelist = data.future;
+
+
+                    //과거
+                    for (var i = 0; i < data.length; i++) {
+
+                        var fee = data[i].d_fee.toString();
+
+                        var feeCut = fee.substring(fee.length, fee.length - 3);
+
+                        var split = fee.split(feeCut);
+
+                        var feeSplit = split[0] + ',' + feeCut;
+
+
+                        console.log("날짜 : " + data[i].d_date);
+                        console.log("오늘 : " + thisday);
+
+                        if (data[i].d_date < thisday) {
+
+                            pasthtml += '<div class="pastDiv">';
+                            pasthtml += '<span class="CommuteSPAN">' + data[i].d_commute + '</span><br>\n';
+                            pasthtml += '<span class="DateSPAN">날짜 : ' + '</span>' + data[i].d_date + '<br>\n';
+                            pasthtml += '<span class="STimeSPAN">출발시간 : ' + '</span>' + data[i].d_startTime + ' <br>\n';
+                            pasthtml += '<span class="ETimeSPAN">도착시간 : </span>' + data[i].d_endTime + '<br>\n';
+                            pasthtml += '<span class="SpointSPAN">출발장소 : </span>' + data[i].d_startPoint + '<br>\n';
+                            pasthtml += '<span class="EpointSPAN">도착장소 : </span>' + data[i].d_endPoint + '<br>\n';
+                            pasthtml += '<button class="btn btn-primary" id="pastmapBTN" onclick="map(' + data[i].d_startlon + ', ' + data[i].d_startlat + ', ' + data[i].d_endlon + ', ' + data[i].d_endlat + ')">지도보기</button>' + '<br>\n';
+                            pasthtml += '<span class="FeeSPAN">요금 : </span>' + feeSplit + '원<br>\n';
+
+                            pasthtml += '<button class="btn btn-primary" id="pastdelBTN"  onclick="deleteData(' + data[i].dr_idx + ')">삭제하기</button>' + '<br><br>\n';
+                            pasthtml += '</div>';
+
+                            //오늘
+                        } else if (data[i].d_date == thisday) {
+
+                            todayhtml += '<div class="pastDiv">';
+                            todayhtml += '<span class="CommuteSPAN">' + data[i].d_commute + '</span><br>\n';
+                            todayhtml += '<span class="DateSPAN">날짜 : ' + '</span>' + data[i].d_date + '<br>\n';
+                            todayhtml += '<span class="STimeSPAN">출발시간 : ' + '</span>' + data[i].d_startTime + ' <br>\n';
+                            todayhtml += '<span class="ETimeSPAN">도착시간 : </span>' + data[i].d_endTime + '<br>\n';
+                            todayhtml += '<span class="SpointSPAN">출발장소 : </span>' + data[i].d_startPoint + '<br>\n';
+                            todayhtml += '<span class="EpointSPAN">도착장소 : </span>' + data[i].d_endPoint + '<br>\n';
+                            todayhtml += '<button class="btn btn-primary" id="pastmapBTN" onclick="map(' + data[i].d_startlon + ', ' + data[i].d_startlat + ', ' + data[i].d_endlon + ', ' + data[i].d_endlat + ')">지도보기</button>' + '<br>\n';
+                            todayhtml += '<span class="FeeSPAN">요금 : </span>' + feeSplit + '원<br>\n';
+
+                            todayhtml += '<button class="btn btn-primary" id="pastdelBTN"  onclick="deleteData(' + data[i].dr_idx + ')">삭제하기</button>' + '<br><br>\n';
+                            todayhtml += '</div>';
+
+                            //미래
+                        } else if (data[i].d_date > thisday) {
+
+                            futurehtml += '<div class="pastDiv">';
+                            futurehtml += '<span class="CommuteSPAN">' + data[i].d_commute + '</span><br>\n';
+                            futurehtml += '<span class="DateSPAN">날짜 : ' + '</span>' + data[i].d_date + '<br>\n';
+                            futurehtml += '<span class="STimeSPAN">출발시간 : ' + '</span>' + data[i].d_startTime + ' <br>\n';
+                            futurehtml += '<span class="ETimeSPAN">도착시간 : </span>' + data[i].d_endTime + '<br>\n';
+                            futurehtml += '<span class="SpointSPAN">출발장소 : </span>' + data[i].d_startPoint + '<br>\n';
+                            futurehtml += '<span class="EpointSPAN">도착장소 : </span>' + data[i].d_endPoint + '<br>\n';
+                            futurehtml += '<button class="btn btn-primary" id="pastmapBTN" onclick="map(' + data[i].d_startlon + ', ' + data[i].d_startlat + ', ' + data[i].d_endlon + ', ' + data[i].d_endlat + ')">지도보기</button>' + '<br>\n';
+                            futurehtml += '<span class="FeeSPAN">요금 : </span>' + feeSplit + '원<br>\n';
+
+                            futurehtml += '<button class="btn btn-primary" id="pastdelBTN"  onclick="deleteData(' + data[i].dr_idx + ')">삭제하기</button>' + '<br><br>\n';
+                            futurehtml += '</div>';
+                        }
+
+                    }
+
+                    $('#pastAllList').html(pasthtml);
+                    $('#todayAllList').html(todayhtml);
+                    $('#futureAllList').html(futurehtml);
+
+                }
+
+            });
+
+            return false;
+
+        };
+
+
+        // 예약된 카풀 날짜 버튼 클릭시 디스플레이
+        $('#pastAllButton').click(function() {
+            $('#pastAllList').css('display', 'inline');
+            $('#todayAllList').css('display', 'none');
+            $('#futureAllList').css('display', 'none');
+        });
+
+        $('#todayAllButton').click(function() {
+            $('#todayAllList').css('display', 'inline');
+            $('#pastAllList').css('display', 'none');
+            $('#futureAllList').css('display', 'none');
+        });
+
+        $('#futureAllButton').click(function() {
+            $('#futureAllList').css('display', 'inline');
+            $('#pastAllList').css('display', 'none');
+            $('#todayAllList').css('display', 'none');
+        });
 
 
 
@@ -414,9 +536,9 @@
             $('#todayList').css('display', 'none');
             $('#futureList').css('display', 'none');
             //버튼활성
-            $('#pastbutton').css('display', 'block');
+            /*$('#pastbutton').css('display', 'block');
             $('#todaybutton').css('display', 'block');
-            $('#futurebutton').css('display', 'block');
+            $('#futurebutton').css('display', 'block');*/
 
         });
 
@@ -425,9 +547,9 @@
             $('#pastList').css('display', 'none');
             $('#futureList').css('display', 'none');
             //버튼활성
-            $('#pastbutton').css('display', 'block');
+            /*$('#pastbutton').css('display', 'block');
             $('#todaybutton').css('display', 'block');
-            $('#futurebutton').css('display', 'block');
+            $('#futurebutton').css('display', 'block');*/
         });
 
         $('#future').click(function() {
@@ -435,11 +557,12 @@
             $('#pastList').css('display', 'none');
             $('#todayList').css('display', 'none');
             //버튼활성
-            $('#pastbutton').css('display', 'block');
+            /*$('#pastbutton').css('display', 'block');
             $('#todaybutton').css('display', 'block');
-            $('#futurebutton').css('display', 'block');
+            $('#futurebutton').css('display', 'block');*/
         });
 
+        allList();
         list();
 
 
@@ -503,37 +626,6 @@
             var html = '<div id="map_div"></div>';
             $('#popupDiv').append(html);
         }
-
-
-        /*
-        $('#pastbutton').click(function(){
-            //과거 닫기버튼
-            pastMapClose(count);
-             var html = '<div id="map_div"></div><br>';
-            $('#pastmap').append(html);
-        });
-        
-        $('#todaybutton').click(function(){
-            //과거 닫기버튼
-            pastMapClose(count);
-             var html = '<div id="map_div"></div><br>';
-            $('#pastmap').append(html);
-        });*/
-
-        /*$('#pastbutton').click(function(){
-            //과거 닫기버튼
-            pastMapClose(count);
-             var html = '<div id="map_div"></div><br>';
-            $('#pastmap').append(html);
-        });*/
-
-
-        /*$('#closebutton').css('display','block');*/
-        /*$('#pastbutton').css('display','none');
-        $('#todaybutton').css('display','none');
-        $('#futurebutton').css('display','none');*/
-
-        /*alert("지도보기용 lonlat" + d_startlon +"  "+ d_startlat +"  "+ d_endlon +"  "+ d_endlat);*/
 
         var map;
 
@@ -617,7 +709,8 @@
             success: function(data) {
                 if (data != null) {
                     alert('정상적으로 삭제되었습니다.');
-                    list();
+                    allList();
+                    List();
 
                 } else {
                     alert('오류가 발생하였습니다.');
@@ -657,14 +750,15 @@
     </nav>
     <section id="home-section" class="ftco-section ftco-no-pb ftco-no-pt">
         <div id="content">
+
             <div class="row justify-content-center pb-0 pb-mb-5 pt-5 pt-md-0">
 
-
-                <h1 class="mb-4">카풀리스트</h1>
-
-
             </div>
+                <h1 class="mb-4">예약 된 카풀</h1>
 
+    <div id="left">
+        
+            
 
             <div id="year">
                 <button id="past" class="btn btn-primary"></button>
@@ -682,17 +776,52 @@
 
 
                 </div>
-            </div>
-
-            <div id="popup_mask"></div> <!-- 팝업 배경 DIV -->
-
+                
+                <div id="popup_mask"></div> <!-- 팝업 배경 DIV -->
+     
             <div id="popupDiv">
                 <!-- 팝업창 -->
                 <button id="popCloseBtn" class="btn btn-primary">닫기</button>
                 <div id="map_div"></div>
             </div>
-
+    
         </div>
+    </div>
+
+
+                <div class="row justify-content-center pb-0 pb-mb-5 pt-5 pt-md-0">
+</div>
+     
+                    <h1 class="mb-4">등록한 카풀</h1>
+
+
+                
+
+    <div id="right">
+
+                <div id="yearallList">
+                    <button id="pastAllButton" class="btn btn-primary"></button>
+                    <button id="todayAllButton" class="btn btn-primary"></button>
+                    <button id="futureAllButton" class="btn btn-primary"></button>
+                </div>
+               
+                    <div id="allList">
+                        <br>
+
+                        <div id="pastAllList"></div>
+                        <div id="todayAllList"></div>
+                        <div id="futureAllList"></div>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            
+
+        
 
     </section>
     <div id="footer"></div>

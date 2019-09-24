@@ -121,6 +121,7 @@
     #today{
        width: 100px;
         height: 40px; 
+        
     }
     #future{
         width: 100px;
@@ -165,7 +166,7 @@
         
         font-family: 'Noto Sans KR', sans-serif;
         padding-bottom: 20px;
-        padding-right: 150px;
+
         font-weight: bolder;
         font-size: 35px;
     }
@@ -228,7 +229,7 @@
         //리스트 none
         /*$('#todayList').css('display','none');*/
         $('#futureList').css('display', 'none');
-        $('#pastList').css('display', 'none');
+
 
 
 
@@ -250,7 +251,6 @@
             var thisday = d.getFullYear() + "-" + "0" + (d.getMonth() + 1) + "-" + d.getDate();
 
             $('#thisyear').append(thisyear);
-            $('#past').append(past);
             $('#today').append(today);
             $('#future').append(future);
 
@@ -261,7 +261,7 @@
 
 
             $.ajax({
-                url: 'http://localhost:8080/reservation/rvInsert/' + 2,
+                url: 'http://localhost:8080/reservation/rvInsert/B/' + 2,
                 type: 'GET',
                 success: function(data) {
 
@@ -288,11 +288,11 @@
                             pasthtml += '<div class="pastDiv">';
                             pasthtml += '<span class="CommuteSPAN">' + data[i].d_commute + '</span><br>\n';
                             
-                            if (data[i].r_confirm == "Y") {
-                            pasthtml += '<span class="type">카풀완료</span><br>\n';
+                            
+                            /*pasthtml += '<span class="type">카풀신청</span><br>\n';*/
                             pasthtml += '<span>탑승자 닉네임 : ' + data[i].nickname + '</span><br>\n';
                             
-                            }
+                           
                             
                             pasthtml += '<span class="DateSPAN">날짜 : ' + '</span>' + data[i].d_date + '<br>\n';
                             pasthtml += '<span class="STimeSPAN">출발시간 : ' + '</span>' + data[i].d_startTime + ' <br>\n';
@@ -311,13 +311,11 @@
                             todayhtml += '<div class="pastDiv">';
                             todayhtml += '<span class="CommuteSPAN">' + data[i].d_commute + '</span><br>\n';
                             
-                            if (data[i].r_confirm == "Y") {
+                           
                             todayhtml += '<span class="type">카풀예정</span><br>\n';
                             todayhtml += '<span>탑승자 닉네임 : ' + data[i].nickname + '</span><br>\n';
                             
-                            }else if(data[i].r_confirm == "B"){
-                                todayhtml += '<span class="type">대기중</span><br>\n'; 
-                                }
+                            
                             
                             todayhtml += '<span class="DateSPAN">날짜 : ' + '</span>' + data[i].d_date + '<br>\n';
                             todayhtml += '<span class="STimeSPAN">출발시간 : ' + '</span>' + data[i].d_startTime + ' <br>\n';
@@ -336,11 +334,10 @@
                             futurehtml += '<div class="pastDiv">';
                             futurehtml += '<span class="CommuteSPAN">' + data[i].d_commute + '</span><br>\n';
                             
-                            if (data[i].r_confirm == "Y") {
+        
                             futurehtml += '<span class="type">카풀예정</span><br>\n';
                             futurehtml += '<span>탑승자 닉네임 : ' + data[i].nickname + '</span><br>\n';
-                            
-                            }
+       
                             
                             futurehtml += '<span class="DateSPAN">날짜 : ' + '</span>' + data[i].d_date + '<br>\n';
                             futurehtml += '<span class="STimeSPAN">출발시간 : ' + '</span>' + data[i].d_startTime + ' <br>\n';
@@ -623,14 +620,14 @@
        <div class="row justify-content-center pb-0 pb-mb-5 pt-5 pt-md-0">
                 
 
-                    <h1 class="mb-4">카풀리스트</h1>
+                    <h1 class="mb-4">카풀요청</h1>
            
                
             </div>
             
         
             <div id="year">
-                <button id="past" class="btn btn-primary"></button>
+      
                 <button id="today" class="btn btn-primary"></button>
                 <button id="future" class="btn btn-primary"></button>
             </div>
@@ -638,7 +635,7 @@
                 <div id="list">
                     <br>
 
-                    <div id="pastList"></div>
+      
                     <div id="todayList"></div>
                     <div id="futureList"></div>
 

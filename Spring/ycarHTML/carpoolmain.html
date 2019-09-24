@@ -194,6 +194,7 @@
         cursor: pointer;
         width: 102px;
         border-radius: 5px;
+        margin-left: 5px;
     }
 
     .box-radio-input input[type="radio"]:checked+span {
@@ -203,6 +204,7 @@
         background: #6258a4;
         color: #fff;
         margin-bottom: 10px;
+        
 </style>
 
 
@@ -250,7 +252,7 @@
                 <form id="rvForm">
                     <div id=""></div>
                     <div class="col-lg align-items-end">
-                        <label for="#" class="label">Commute</label>
+                        <label for="#" class="label">출퇴근</label>
                         <br>
                         <label class="box-radio-input"><input type="radio" class="work" id="towork" name="work" value="출근" ><span>출근</span></label>
                         <label class="box-radio-input"><input type="radio" class="work" id="fromwork" name="work" value="퇴근"><span>퇴근</span></label>
@@ -916,7 +918,7 @@
         $('#rvForm').submit(function() {
 
             $.ajax({
-                url: 'http://localhost:8080/reservation/rvInsert/' + 2,
+                url: 'http://localhost:8080/reservation/carpool/' + 2,
                 type: 'POST',
                 data: JSON.stringify({
                     d_date: $('#datepicker').val().toString(),

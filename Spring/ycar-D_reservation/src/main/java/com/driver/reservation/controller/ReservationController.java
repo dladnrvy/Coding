@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.driver.reservation.domain.Carpool;
 import com.driver.reservation.domain.DriverReservation;
 import com.driver.reservation.service.InsertReservationService;
 import com.driver.reservation.service.ShowListService;
@@ -20,7 +21,7 @@ import com.driver.reservation.service.deleteService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/rvInsert")
+@RequestMapping("/carpool")
 public class ReservationController {
 
 	@Autowired
@@ -50,11 +51,35 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/{d_idx}")
-	public List<DriverReservation> SelectRV(
+	public List<Carpool> selectAllList(
 			@PathVariable("d_idx") int d_idx
 			) {
 		
-		List<DriverReservation> drv = showlist.showListForDate(d_idx);
+		List<Carpool> drv = showlist.showAllList(d_idx);
+				
+		System.out.println("검색하고자하는 idx는?" + d_idx);
+			
+		return drv;
+	}
+	
+	@GetMapping("/B/{d_idx}")
+	public List<DriverReservation> BcarpoolList(
+			@PathVariable("d_idx") int d_idx
+			) {
+		
+		List<DriverReservation> drv = showlist.BmycarpoolList(d_idx);
+				
+		System.out.println("검색하고자하는 idx는?" + d_idx);
+			
+		return drv;
+	}
+	
+	@GetMapping("/Y/{d_idx}")
+	public List<DriverReservation> YcarpoolList(
+			@PathVariable("d_idx") int d_idx
+			) {
+		
+		List<DriverReservation> drv = showlist.YmycarpoolList(d_idx);
 				
 		System.out.println("검색하고자하는 idx는?" + d_idx);
 			

@@ -15,6 +15,9 @@ public class D_carpoolEntity {
 	private long dr_idx;
 	
 	@Column(nullable = false)
+	private int d_idx;
+	
+	@Column(nullable = false)
 	private String d_date;
 	
 	@Column(length = 255, nullable = false)
@@ -47,7 +50,15 @@ public class D_carpoolEntity {
 	@Column(length = 500, nullable = true)
 	private String d_endlat;
 
-	
+
+	public int getD_idx() {
+		return d_idx;
+	}
+
+	public void setD_idx(int d_idx) {
+		this.d_idx = d_idx;
+	}
+
 	public long getDr_idx() {
 		return dr_idx;
 	}
