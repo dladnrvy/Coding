@@ -4,6 +4,7 @@ package com.ycar.reservation.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -154,6 +155,11 @@ public class D_carpoolEntity {
 	public void setD_endlat(String d_endlat) {
 		this.d_endlat = d_endlat;
 	}
+	
+	/*
+	 * @OneToOne(mappedBy = "D_carpoolEntity") private ReservationEntity
+	 * reservationEntity;
+	 */
 	
 	
 }

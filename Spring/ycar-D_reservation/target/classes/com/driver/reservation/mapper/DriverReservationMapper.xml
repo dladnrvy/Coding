@@ -9,6 +9,7 @@
 
 <resultMap type="com.driver.reservation.domain.DriverReservation" id="drv">
 	<id property="dr_idx" column="dr_idx"/>
+	<result property="r_idx" column="r_idx"/>
 	<result property="d_idx" column="d_idx"/>
 	<result property="d_date" column="d_date"/>
 	<result property="d_startTime" column="d_starttime"/>
@@ -23,25 +24,7 @@
 	<result property="d_endlon" column="d_endlon"/>
 	<result property="d_endlat" column="d_endlat"/>
 	<result property="nickname" column="nickname"/>
-	<result property="r_idx" column="r_idx"/>
 	<result property="r_confirm" column="r_confirm"/>
-</resultMap>
-
-<resultMap type="com.driver.reservation.domain.Carpool" id="carpool">
-	<id property="dr_idx" column="dr_idx"/>
-	<result property="d_idx" column="d_idx"/>
-	<result property="d_date" column="d_date"/>
-	<result property="d_startTime" column="d_starttime"/>
-	<result property="d_endTime" column="d_endtime"/>
-	<result property="d_commute" column="d_commute"/>
-	<result property="d_startPoint" column="d_startpoint"/>
-	<result property="d_endPoint" column="d_endpoint"/>
-	<result property="d_fee" column="d_fee"/>
-	<result property="d_distance" column="d_distance"/>
-	<result property="d_startlon" column="d_startlon"/>
-	<result property="d_startlat" column="d_startlat"/>
-	<result property="d_endlon" column="d_endlon"/>
-	<result property="d_endlat" column="d_endlat"/>
 </resultMap>
 
 <insert id="InsertReservation" parameterType="com.driver.reservation.domain.DriverReservation">
@@ -50,7 +33,7 @@
 
 <!-- 카풀요청 -->
 <select id="mycarpoolB" resultMap="drv">
-	select p.nickname, d.d_date, d.d_starttime, d.d_endtime, d.d_startpoint, d.d_endpoint, d.d_commute, d.d_fee, d.d_startlon, d.d_startlat, d.d_endlon, d.d_endlat,r.r_confirm
+	select  r.r_idx, p.nickname, d.d_date, d.d_starttime, d.d_endtime, d.d_startpoint, d.d_endpoint, d.d_commute, d.d_fee, d.d_startlon, d.d_startlat, d.d_endlon, d.d_endlat,r.r_confirm
 	from RESERVATION as r 
 	join D_CARPOOL as d 
 	on d.dr_idx = r.dr_idx
@@ -61,7 +44,7 @@
 
 <!-- 나의카풀 - 수락한내역 -->
 <select id="mycarpoolY" resultMap="drv">
-	select p.nickname, d.d_date, d.d_starttime, d.d_endtime, d.d_startpoint, d.d_endpoint, d.d_commute, d.d_fee, d.d_startlon, d.d_startlat, d.d_endlon, d.d_endlat,r.r_confirm
+	select  r.r_idx, p.nickname, d.d_date, d.d_starttime, d.d_endtime, d.d_startpoint, d.d_endpoint, d.d_commute, d.d_fee, d.d_startlon, d.d_startlat, d.d_endlon, d.d_endlat,r.r_confirm
 	from RESERVATION as r 
 	join D_CARPOOL as d 
 	on d.dr_idx = r.dr_idx
@@ -71,15 +54,32 @@
 </select>
 
 <!-- 나의카풀 - 등록한 전체 리스트 -->
-<select id="carpoolAllList" resultMap="carpool">
-	SELECT dr_idx, d_date, d_starttime, d_endtime, d_startpoint, d_endpoint, d_commute, d_fee, d_startlon, d_startlat, d_endlon, d_endlat
-	FROM ycar.D_CARPOOL
-	 where d_idx = #{d_idx} order by d.d_date desc;
+<select id="carpoolAllList" resultMap="drv">
+	SELECT d.dr_idx, r.r_idx, d.d_date, d.d_starttime, d.d_endtime, d.d_startpoint, d.d_endpoint, d.d_commute, d.d_fee, d.d_startlon, d.d_startlat, d.d_endlon, d.d_endlat, r.r_confirm
+	FROM ycar.D_CARPOOL as d
+	left join RESERVATION as r
+	on d.dr_idx = r.dr_idx
+	where d_idx = #{d_idx} group by d.dr_idx order by d.d_date desc;
 </select>
 
-<delete id="deleteCarpoor">
+<delete id="deleteCarpool">
 	delete from D_CARPOOL where dr_idx= #{dr_idx};
 </delete>
+
+<!-- 예약 거절,취소 -->
+<update id="cancleCarpoor" parameterType="com.driver.reservation.domain.DriverReservation">
+	delete from RESERVATION where r_idx = #{r_idx};
+</update>
+
+<!-- 예약 승낙 -->
+<update id="concentCarpoor" parameterType="com.driver.reservation.domain.DriverReservation">
+	update RESERVATION set r_confirm = 'Y' where r_idx = #{r_idx};
+</update>
+
+<!-- 예약 취소 -->
+<!-- <update id="refuseCarpoor" parameterType="drv">
+	update RESERVATION set r_confirm = 'N' where r_idx = #{r_idx};
+</update> -->
 
 
   

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -655,9 +657,6 @@
             "left": (($(window).width() - $("#popupDiv").outerWidth()) / 2 ) + "px"
             //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
 
-            
-            //
-            //+ $(window).scrollLeft()
         });
 
         $("#popup_mask").css("display", "block"); //팝업 뒷배경 display block
@@ -808,9 +807,9 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav nav ml-auto">
-                    <li class="nav-item"><a href="#home-section" class="nav-link"><span>카풀등록</span></a></li>
-                    <li class="nav-item"><a href="#services-section" class="nav-link"><span>카풀요청</span></a></li>
-                    <li class="nav-item"><a href="#about-section" class="nav-link"><span>나의카풀</span></a></li>
+                    <li class="nav-item"><a href="index.jsp" class="nav-link"><span>카풀등록</span></a></li>
+                    <li class="nav-item"><a href="carpool.jsp" class="nav-link"><span>카풀요청</span></a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"><span>나의카풀</span></a></li>
                     <li class="nav-item"><a href="#destination-section" class="nav-link"><span>결제</span></a></li>
                     <li class="nav-item"><a href="#hotel-section" class="nav-link"><span>후기</span></a></li>
                     <li class="nav-item"><a href="#restaurant-section" class="nav-link"><span>마이페이지</span></a></li>

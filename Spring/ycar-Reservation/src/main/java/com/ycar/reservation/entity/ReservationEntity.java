@@ -4,9 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -63,6 +61,30 @@ public class ReservationEntity {
 	public String toString() {
 		return "ReservationEntity [r_idx=" + r_idx + ", p_idx=" + p_idx + ", dr_idx=" + dr_idx + ", r_confirm="
 				+ r_confirm + "]";
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "p_idx", insertable = false, updatable = false)
+	private PassengerEntity passengerEntity;
+	
+	public PassengerEntity getPassengerEntity() {
+		return passengerEntity;
+	}
+	
+	public void setPassengerEntity(PassengerEntity passengerEntity) {
+		this.passengerEntity = passengerEntity;
+	}
+	
+	@OneToOne
+	@JoinColumn(name = "dr_idx", insertable = false, updatable = false)
+	private ReservationEntity reservationEntity;
+	
+	public ReservationEntity getReservationEntity() {
+		return reservationEntity;
+	}
+	
+	public void setReservationEntity(ReservationEntity reservationEntity) {
+		this.reservationEntity = reservationEntity;
 	}
 	
 	

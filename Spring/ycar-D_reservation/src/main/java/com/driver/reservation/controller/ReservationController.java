@@ -1,12 +1,15 @@
 package com.driver.reservation.controller;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +19,7 @@ import com.driver.reservation.domain.DriverReservation;
 import com.driver.reservation.service.InsertReservationService;
 import com.driver.reservation.service.ShowListService;
 import com.driver.reservation.service.deleteService;
+import com.driver.reservation.service.updateService;
 
 
 
@@ -30,6 +34,8 @@ public class ReservationController {
 	private ShowListService showlist;
 	@Autowired
 	private deleteService deleteRV;
+	@Autowired
+	private updateService updateRV;
 	
 	@PostMapping
 	@RequestMapping("/{d_idx}")
@@ -51,13 +57,14 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/{d_idx}")
-	public List<Carpool> selectAllList(
+	public List<DriverReservation> selectAllList(
 			@PathVariable("d_idx") int d_idx
 			) {
 		
-		List<Carpool> drv = showlist.showAllList(d_idx);
+		List<DriverReservation> drv = showlist.showAllList(d_idx);
 				
 		System.out.println("검색하고자하는 idx는?" + d_idx);
+		System.out.println("ajax 가기전 리스트 확인 : " + drv.toString());
 			
 		return drv;
 	}
@@ -94,6 +101,30 @@ public class ReservationController {
 		int dr = 0;
 		
 		dr = deleteRV.deleteCarpoor(dr_idx);
+		
+		return dr;
+	}
+	
+	@DeleteMapping("/N/{r_idx}")
+	public int updateCencleRV(
+			@PathVariable("r_idx") int r_idx
+			) {
+		
+		int dr = 0;
+		
+		dr = updateRV.cancleCarpoor(r_idx);
+		
+		return dr;
+	}
+	
+	@PutMapping("/Y/{r_idx}")
+	public int updateConcentRV(
+			@PathVariable("r_idx") int r_idx
+			) {
+		
+		int dr = 0;
+		
+		dr = updateRV.concentCarpoor(r_idx);
 		
 		return dr;
 	}

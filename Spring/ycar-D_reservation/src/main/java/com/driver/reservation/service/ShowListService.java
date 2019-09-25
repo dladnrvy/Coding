@@ -19,13 +19,13 @@ public class ShowListService {
 
 	private DriverReservationDao dao;
 
-	public List<Carpool> showAllList(int d_idx) {
+	public List<DriverReservation> showAllList(int d_idx) {
 			
 		System.out.println("(서비스-전체출력) 하는 사람의 idx는" + d_idx);
 	
 		dao = template.getMapper(DriverReservationDao.class);	
 			
-		List<Carpool> test = dao.carpoolAllList(d_idx);	
+		List<DriverReservation> test = dao.carpoolAllList(d_idx);	
 		
 		System.out.println("(서비스-전체출력) 출력해봅니다 : "+test);
 		

@@ -188,7 +188,7 @@ public class DriverReservation {
 				+ d_startTime + ", d_endTime=" + d_endTime + ", d_commute=" + d_commute + ", d_startPoint="
 				+ d_startPoint + ", d_endPoint=" + d_endPoint + ", d_fee=" + d_fee + ", d_distance=" + d_distance
 				+ ", d_startlon=" + d_startlon + ", d_startlat=" + d_startlat + ", d_endlon=" + d_endlon + ", d_endlat="
-				+ d_endlat + ", 탑승자 닉네임 =" + nickname + ", 예약 idx=" + r_idx + ", 예약 B,Y,N 여부="
+				+ d_endlat + ", 탑승자 닉네임 =" + nickname + ", 예약 idx=" + r_idx + " , 예약 B,Y,N 여부="
 				+ r_confirm + "]";
 	}
 	
