@@ -1,10 +1,13 @@
 package com.ycar.reservation.entity;
 
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -20,6 +23,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -28,42 +32,38 @@ import org.hibernate.annotations.NaturalIdCache;
 
 @Entity
 @Table(name="D_CARPOOL")
-/*
- * @Inheritance(strategy = InheritanceType.JOINED)
- * 
- * @DiscriminatorColumn(name = "dr_idx")
- * 
- * @NaturalIdCache
- * 
- * @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
- */
+@SqlResultSetMapping(
+		name = "ReservationMapping",
+		classes = @ConstructorResult(
+				targetClass = ReservationDTO.class,
+				columns = {
+						@ColumnResult(name="dr_idx", type = BigInteger.class),
+						/* @ColumnResult(name="d_idx", type = BigInteger.class), */
+						@ColumnResult(name="d_date", type = String.class),
+						@ColumnResult(name="d_starttime", type = String.class),
+						@ColumnResult(name="d_endtime", type = String.class),
+						@ColumnResult(name="d_startpoint", type = String.class),
+						@ColumnResult(name="d_endpoint", type = String.class),
+						@ColumnResult(name="d_commute", type = String.class),
+						@ColumnResult(name="d_fee", type = Integer.class),
+						@ColumnResult(name="d_startlon", type = String.class),
+						@ColumnResult(name="d_startlat", type = String.class),
+						@ColumnResult(name="d_endlon", type = String.class),
+						@ColumnResult(name="d_endlat", type = String.class)
+						
+				})
+		)
 public class D_CARPOOL{
-	
-	public D_CARPOOL() {}
-	
-	
-
-	public D_CARPOOL(long dr_idx, String d_date, String d_starttime, String d_endtime, String d_startpoint,
-			String d_endpoint, String d_commute, int d_fee, String d_startlon, String d_startlat, String d_endlon,
-			String d_endlat) {
-		this.dr_idx = dr_idx;
-		this.d_date = d_date;
-		this.d_starttime = d_starttime;
-		this.d_endtime = d_endtime;
-		this.d_startpoint = d_startpoint;
-		this.d_endpoint = d_endpoint;
-		this.d_commute = d_commute;
-		this.d_fee = d_fee;
-		this.d_startlon = d_startlon;
-		this.d_startlat = d_startlat;
-		this.d_endlon = d_endlon;
-		this.d_endlat = d_endlat;
-	}
 
 
 	@Id
 	@Column(length = 10)
+	@GeneratedValue
 	private long dr_idx;
+	
+	/*
+	 * @Column private long d_idx;
+	 */
 	
 	@Column(nullable = false)
 	private String d_date;
@@ -99,8 +99,27 @@ public class D_CARPOOL{
 	private String d_endlat;
 
 
-
 	
+	
+
+	public D_CARPOOL() {}
+
+	public D_CARPOOL(long dr_idx, String d_date, String d_starttime, String d_endtime, String d_startpoint,
+			String d_endpoint, String d_commute, int d_fee, String d_startlon, String d_startlat, String d_endlon,
+			String d_endlat) {
+		this.dr_idx = dr_idx;
+		this.d_date = d_date;
+		this.d_starttime = d_starttime;
+		this.d_endtime = d_endtime;
+		this.d_startpoint = d_startpoint;
+		this.d_endpoint = d_endpoint;
+		this.d_commute = d_commute;
+		this.d_fee = d_fee;
+		this.d_startlon = d_startlon;
+		this.d_startlat = d_startlat;
+		this.d_endlon = d_endlon;
+		this.d_endlat = d_endlat;
+	}
 
 	public long getDr_idx() {
 		return dr_idx;
@@ -198,15 +217,16 @@ public class D_CARPOOL{
 		this.d_endlat = d_endlat;
 	}
 	
-	  @ManyToOne(targetEntity = DRIVER.class)
-	  @JoinColumn(name="d_idx",insertable = false, updatable=false)
-	  @MapsId(value = "d_idx")
-	  private DRIVER DRIVER;
-	  
-	  public DRIVER getD_carpoolEntity() { return DRIVER; }
-	  
-	  public void setD_carpoolEntity(DRIVER DRIVER){ this.DRIVER =
-			  DRIVER; }
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name="d_idx",insertable = false, updatable=false) private DRIVER
+	 * DRIVER;
+	 * 
+	 * public DRIVER getD_carpoolEntity() { return DRIVER; }
+	 * 
+	 * public void setD_carpoolEntity(DRIVER DRIVER){ this.DRIVER = DRIVER; }
+	 */
 	
 	/*
 	 * @OneToOne(mappedBy = "D_carpoolEntity") private ReservationEntity

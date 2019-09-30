@@ -1,9 +1,12 @@
 package com.ycar.reservation.entity;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -17,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -25,6 +29,15 @@ import org.hibernate.annotations.NaturalIdCache;
 
 @Entity
 @Table(name="PASSENGER")
+@SqlResultSetMapping(
+		name = "ReservationMapping",
+		classes = @ConstructorResult(
+				targetClass = ReservationDTO.class,
+				columns = {
+						@ColumnResult(name="p_idx", type = BigInteger.class),
+						@ColumnResult(name="nickname", type = String.class)
+				})
+		)
 /*
  * @DiscriminatorColumn(name = "p_idx")
  * 
@@ -37,15 +50,14 @@ import org.hibernate.annotations.NaturalIdCache;
 public class PASSENGER{
 
 	@Id
-	@Column(length = 10)
+	@Column
+	@GeneratedValue
 	private long p_idx;
 	
 	@Column(length = 50, nullable = true)
 	private String nickname;
 	
 	public PASSENGER() {}
-	
-	
 
 	
 	public PASSENGER(long p_idx, String nickname) {

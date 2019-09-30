@@ -1,10 +1,13 @@
 package com.ycar.reservation.entity;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -19,10 +22,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -34,30 +39,70 @@ import com.ycar.reservation.domain.Reservation;
 @Entity
 @Table(name = "RESERVATION")
 /*
- * @DiscriminatorValue("A")
+ * @NamedNativeQuery(name="Mapping", query =
+ * "select r.r_idx, sp.nickname, d.d_date, d.d_starttime, d.d_endtime, d.d_startpoint, d.d_endpoint, d.d_commute, d.d_fee, d.d_startlon, d.d_startlat, d.d_endlon, d.d_endlat,r.r_confirm "
+ * + " from RESERVATION r " + " join D_CARPOOL d " + " join PASSENGER sp " +
+ * " where d.d_idx = 'd_idx' " + " and r.r_confirm = 'B' ", resultSetMapping =
+ * "ReservationMapping"
  * 
- * @PrimaryKeyJoinColumn(name = "r_idx")
+ * )
  */
+@SqlResultSetMapping(
+		name = "ReservationMapping",
+		classes = @ConstructorResult(
+				targetClass = ReservationDTO.class,
+				columns = {
+						@ColumnResult(name="r_idx", type = BigInteger.class),
+						@ColumnResult(name="r_confirm", type = String.class)
+				})
+		)
 public class RESERVATION{
 
 	@Id
 	@Column(length = 10)
 	private long r_idx;
 	
-	/*
-	 * @Column private int p_idx;
-	 * 
-	 * @Column private int dr_idx;
-	 */
+	
+	  @Column private long p_idx;
+	  
+	  @Column private long dr_idx;
+	 
 	 
 	
 	
-	/* @JoinColumn(name = "p_idx") */
+	public long getP_idx() {
+		return p_idx;
+	}
+
+
+
+	public void setP_idx(long p_idx) {
+		this.p_idx = p_idx;
+	}
+
+
+
+	public long getDr_idx() {
+		return dr_idx;
+	}
+
+
+
+	public void setDr_idx(long dr_idx) {
+		this.dr_idx = dr_idx;
+	}
+
+
+
+		/* @JoinColumn(name = "p_idx") */
 	/* @JoinTable(name = "PASSENGER") */
 	//, fetch = FetchType.LAZY
-		@ManyToOne(targetEntity = PASSENGER.class)
-		@JoinColumn(name="p_idx",insertable = false, updatable=false)
-	  private PASSENGER passengerIdx;
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name="p_idx",insertable = false, updatable=false) private
+	 * PASSENGER passengerIdx;
+	 */
 	  
 	
 	/*
@@ -65,9 +110,12 @@ public class RESERVATION{
 	 * "D_CARPOOL")
 	 */
 	/* @JoinTable(name = "D_CARPOOL") */
-		@ManyToOne(targetEntity = D_CARPOOL.class)
-	  @JoinColumn(name = "dr_idx" ,insertable = false, updatable=false)
-	  private D_CARPOOL dcarpoolIdx;
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name = "dr_idx" ,insertable = false, updatable=false) private
+	 * D_CARPOOL dcarpoolIdx;
+	 */
 		
 		
 	 
@@ -79,10 +127,18 @@ public class RESERVATION{
 
 
 
-	public RESERVATION(long r_idx, PASSENGER passengerIdx, D_CARPOOL dcarpoolIdx, String r_confirm) {
+	
+
+
+
+	
+
+
+
+	public RESERVATION(long r_idx, long p_idx, long dr_idx, String r_confirm) {
 		this.r_idx = r_idx;
-		this.passengerIdx = passengerIdx;
-		this.dcarpoolIdx = dcarpoolIdx;
+		this.p_idx = p_idx;
+		this.dr_idx = dr_idx;
 		this.r_confirm = r_confirm;
 	}
 
@@ -128,27 +184,23 @@ public class RESERVATION{
 
 
 
-	public PASSENGER getPassengerIdx() {
-		return passengerIdx;
-	}
-
-
-
-	public void setPassengerIdx(PASSENGER passengerIdx) {
-		this.passengerIdx = passengerIdx;
-	}
-
-
-
-	public D_CARPOOL getDcarpoolIdx() {
-		return dcarpoolIdx;
-	}
-
-
-
-	public void setDcarpoolIdx(D_CARPOOL dcarpoolIdx) {
-		this.dcarpoolIdx = dcarpoolIdx;
-	}
+	/*
+	 * public PASSENGER getPassengerIdx() { return passengerIdx; }
+	 * 
+	 * 
+	 * 
+	 * public void setPassengerIdx(PASSENGER passengerIdx) { this.passengerIdx =
+	 * passengerIdx; }
+	 * 
+	 * 
+	 * 
+	 * public D_CARPOOL getDcarpoolIdx() { return dcarpoolIdx; }
+	 * 
+	 * 
+	 * 
+	 * public void setDcarpoolIdx(D_CARPOOL dcarpoolIdx) { this.dcarpoolIdx =
+	 * dcarpoolIdx; }
+	 */
 
 
 

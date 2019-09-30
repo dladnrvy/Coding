@@ -3,6 +3,7 @@ package com.ycar.reservation.controller;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ycar.reservation.Repository.ReservationRepository;
+import com.ycar.reservation.dao.ReservationDao;
 import com.ycar.reservation.domain.Reservation;
-import com.ycar.reservation.entityty.RESERVATION;
+import com.ycar.reservation.entity.ReservationDTO;
+import com.ycar.reservation.entity.RESERVATION;
 
 @Controller
 public class ReservationController {
@@ -27,6 +30,8 @@ public class ReservationController {
 	@PersistenceContext
 	EntityManager entityManager;
 
+	
+	private ReservationDao rvDao;
 	
 	@Autowired
 	private ReservationRepository respository;
@@ -52,6 +57,25 @@ public class ReservationController {
 		 */
 	
 		
+		return list;
+	}
+	
+	public ReservationController() {
+		this.rvDao = new ReservationDao(entityManager);
+	}
+	
+	@RequestMapping("/getlist/{d_idx}")
+	@ResponseBody
+	public List<ReservationDTO> getList(
+			@PathVariable("d_idx") int d_idx
+			){
+		System.out.println("첫번쨰" + d_idx);
+		this.rvDao = new ReservationDao(entityManager);
+		
+		List<ReservationDTO> list = rvDao.reservationList(d_idx);
+		
+		System.out.println("두번쨰" + d_idx);
+	
 		return list;
 	}
 }
