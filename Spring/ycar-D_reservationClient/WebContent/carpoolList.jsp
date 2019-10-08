@@ -287,17 +287,65 @@
     var d = new Date();
 
     var thisyear = d.getFullYear() + "년";
+    var today;
+    var past;
+    var future;
+    var thisday;
+    
+    //날짜 비교 변수
+    //10월 미만, 10일 미만 은 0붙여주기
+    if(d.getMonth()+1 < 10 && d.getDate() < 10){
+    	thisday = d.getFullYear() + "-" + "0" + (d.getMonth() + 1) + "-" +"0"+ d.getDate();	
+    	//그냥 10월 미만
+    }if(d.getMonth()+1 < 10){
+    	thisday = d.getFullYear() + "-" + "0" + (d.getMonth() + 1) + "-" + d.getDate();	
+    	//10일 미만
+    }if(d.getDate() < 10){
+    	thisday = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + "0" + d.getDate();	
+    }if(d.getMonth() + 1 == 13){
+    	thisday = d.getFullYear() + "-" + "01" + "-" + d.getDate();
+    }else{
+    	thisday = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+    }
+    	
+    
+    
+    //과거
+    //0일일경우..
+    if(d.getDate()-1 < 1){
+    	//3일일경우..
+    	}if(d.getMonth()+1 == '3'){
+    		past = "~" + (d.getMonth() + 1) + "/28";
+    		//홀수달일경우.. 
+    	}if(d.getMonth()+1 == '1' || '5' || '7' || '9' || '11'){
+    		past = "~" + (d.getMonth() + 1) + "/30";
+    		//짝수달일경우..
+    	}if(d.getMonth()+1 == '2' || '4' || '6' || '8' || '10' || '12'){
+    		past = "~" + (d.getMonth() + 1) + "/31";
+    	}else{
+    		past = "~" + (d.getMonth() + 1) + "/" + (d.getDate() - 1);	
+    	}
+    	
+    	//오늘
+        today = (d.getMonth() + 1) + "/" + d.getDate();
+    
+    
+    //미래
+    //32일이 되어버린다면..
+    if(d.getDate() + 1 == 32){
+    	future = (d.getMonth() + 2) + "/1" + "~";	
+    }else{
+    	future = (d.getMonth() + 1) + "/" + (d.getDate() + 1) + "~";
+    }
+    
 
     //오늘
-    var today = (d.getMonth() + 1) + "/" + d.getDate();
+    today = (d.getMonth() + 1) + "/" + d.getDate();
+    
 
-    //과거
-    var past = "~" + (d.getMonth() + 1) + "/" + (d.getDate() - 1);
+    
 
-    //미래
-    var future = (d.getMonth() + 1) + "/" + (d.getDate() + 1) + "~";
-
-    var thisday = d.getFullYear() + "-" + "0" + (d.getMonth() + 1) + "-" + d.getDate();
+    
 
 
 
